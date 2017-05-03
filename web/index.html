@@ -1,3 +1,4 @@
+<!-- Part1: View -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -256,18 +257,18 @@
                         </thead>
                         <tbody>
                         <tr>
-                            <td>Name </td><td><input type="text" placeholder="name " class="input-xlarge"></td>
+                            <td>Name </td><td><input type="text" placeholder="name " ng-model="Name"></td>
                         </tr>
                         <tr>
-                            <td>Address </td><td><input type="text" placeholder="address " class="input-xlarge"></td>
+                            <td>Address </td><td><input type="text" placeholder="address " ng-model="Address"></td>
                         </tr>
                         <tr>
-                            <td>Phone No. </td><td><input type="text" placeholder="telephone number " class="input-xlarge"></td>
+                            <td>Phone No. </td><td><input type="text" placeholder="telephone number " ng-model="PhoneNo"></td>
                         </tr>
                         </tbody>
                     </table>
                 </div>
-                <p><a class="btn btn-default pull-right" href="#" role="button">Make order right now! &raquo;</a></p>
+                <p><a class="btn btn-default pull-right" role="button" ng-click="makeOrder()">Make order right now! &raquo;</a></p>
             </div>
 
             <!--</div>-->

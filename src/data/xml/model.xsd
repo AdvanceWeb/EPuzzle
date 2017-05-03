@@ -3,22 +3,22 @@
   <xs:element name="Model" type="ModelType"/>
   <xs:complexType name="OutlineType">
     <xs:sequence>
-      <xs:element type="xs:string" name="Up"/>
-      <xs:element type="xs:string" name="Right"/>
-      <xs:element type="xs:string" name="Bottom"/>
-      <xs:element type="xs:string" name="Left"/>
+      <xs:element type="xs:integer" name="Up"/>
+      <xs:element type="xs:integer" name="Right"/>
+      <xs:element type="xs:integer" name="Bottom"/>
+      <xs:element type="xs:integer" name="Left"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ShapeType">
     <xs:sequence>
       <xs:element type="xs:string" name="Content"/>
-      <xs:element type="xs:string" name="Price"/>
+      <xs:element type="xs:integer" name="Price"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ColorType">
     <xs:sequence>
       <xs:element type="xs:string" name="Content"/>
-      <xs:element type="xs:string" name="Price"/>
+      <xs:element type="xs:integer" name="Price"/>
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ModelType">

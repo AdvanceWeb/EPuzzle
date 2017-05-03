@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<Order>
+    <Date></Date>
+    <Product>
+        <Color>
+            <Content></Content>
+            <Price></Price>
+            <Value></Value>
+        </Color>
+        <Shape>
+            <Content></Content>
+            <Price></Price>
+        </Shape>
+        <Size>
+            <Width></Width>
+            <Height></Height>
+            <Price></Price>
+        </Size>
+    </Product>
+    <Customer>
+        <Name></Name>
+        <Address></Address>
+        <PhoneNo></PhoneNo>
+    </Customer>
+    <Price></Price>
+</Order>

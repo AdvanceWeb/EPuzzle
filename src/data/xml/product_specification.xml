@@ -3,35 +3,35 @@
     <Shapes>
         <Shape>
             <Content>egg</Content>
-            <Price>6.0</Price>
+            <Price>6</Price>
         </Shape>
         <Shape>
             <Content>hexagonal</Content>
-            <Price>6.0</Price>
+            <Price>6</Price>
         </Shape>
         <Shape>
             <Content>semicircle</Content>
-            <Price>5.0</Price>
+            <Price>5</Price>
         </Shape>
         <Shape>
             <Content>triangle</Content>
-            <Price>5.0</Price>
+            <Price>8</Price>
         </Shape>
     </Shapes>
     <Colors>
         <Color>
             <Content>red</Content>
-            <Price>5.0</Price>
+            <Price>5</Price>
             <Value>0xff0000</Value>
         </Color>
         <Color>
             <Content>blue</Content>
-            <Price>6.0</Price>
+            <Price>6</Price>
             <Value>0x0000ff</Value>
         </Color>
         <Color>
             <Content>green</Content>
-            <Price>6.0</Price>
+            <Price>7</Price>
             <Value>0x00ff00</Value>
         </Color>
     </Colors>

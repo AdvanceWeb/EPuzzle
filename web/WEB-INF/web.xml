@@ -11,4 +11,12 @@
         <servlet-name>OnloadServlet</servlet-name>
         <url-pattern>/OnloadServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>MakeOrderServlet</servlet-name>
+        <servlet-class>MakeOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MakeOrderServlet</servlet-name>
+        <url-pattern>/MakeOrderServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

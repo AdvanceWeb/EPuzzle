@@ -5,7 +5,6 @@
 		<xs:complexType>
 			<xs:sequence>
 				<xs:element name="Date" type="xs:date"/>
-				<xs:element name="Size" type="sizes"/>
 				<xs:element name="Product" type="products"/>
 				<xs:element name="Customer" type="customers"/>
 				<xs:element name="Price" type="xs:integer"/>

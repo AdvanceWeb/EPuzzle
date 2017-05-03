@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Order" type="OrderType"/>
+  <xs:complexType name="OrderType">
+    <xs:sequence>
+      <xs:element type="xs:date" name="Date"/>
+      <xs:element type="ProductType" name="Product"/>
+      <xs:element type="CustomerType" name="Customer"/>
+      <xs:element type="xs:integer" name="Price"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ShapeType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Content"/>
+      <xs:element type="xs:integer" name="Price"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ProductType">
+    <xs:sequence>
+      <xs:element type="ColorType" name="Color"/>
+      <xs:element type="ShapeType" name="Shape"/>
+      <xs:element type="SizeType" name="Size"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ColorType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Content"/>
+      <xs:element type="xs:integer" name="Price"/>
+      <xs:element type="xs:integer" name="Value"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SizeType">
+    <xs:sequence>
+      <xs:element type="xs:integer" name="Width"/>
+      <xs:element type="xs:integer" name="Height"/>
+      <xs:element type="xs:integer" name="Price"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CustomerType">
+    <xs:sequence>
+      <xs:element type="xs:string" name="Name"/>
+      <xs:element type="xs:string" name="Address"/>
+      <xs:element type="xs:string" name="PhoneNo"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -38,7 +38,7 @@ app.controller('myCtrl', function($scope, $http) {
         for (i = 0; i < shapes.length; i++) {
             var child = shapes[i];
             var content = child.getElementsByTagName("Content")[0].textContent;
-            var price = parseFloat(child.getElementsByTagName("Price")[0].textContent);
+            var price = parseInt(child.getElementsByTagName("Price")[0].textContent);
             var tmp = {content : content, price : price};
             $scope.Shapes.push(tmp);
         }
@@ -46,7 +46,7 @@ app.controller('myCtrl', function($scope, $http) {
         for (i = 0; i < colors.length; i++) {
             var child = colors[i];
             var content = child.getElementsByTagName("Content")[0].textContent;
-            var price = parseFloat(child.getElementsByTagName("Price")[0].textContent);
+            var price = parseInt(child.getElementsByTagName("Price")[0].textContent);
             var value = parseInt(child.getElementsByTagName("Value")[0].textContent,16);
             var tmp = {content : content, price : price, color: value};
             $scope.Colors.push(tmp);
@@ -57,7 +57,7 @@ app.controller('myCtrl', function($scope, $http) {
             var width = child.getElementsByTagName("Width")[0].textContent;
             var height = child.getElementsByTagName("Height")[0].textContent;
             var content = width+ "*" + height;
-            var price = parseFloat(child.getElementsByTagName("Price")[0].textContent);
+            var price = parseInt(child.getElementsByTagName("Price")[0].textContent);
             var tmp = {size : content, width: width, height: height, price : price};
             $scope.Sizes.push(tmp);
         }
@@ -80,4 +80,55 @@ app.controller('myCtrl', function($scope, $http) {
             changeShape(obj.content);
         }
     },true);
+
+    $scope.makeOrder = function () {
+        var order = createOrder();
+        var data = {order: order};
+        var transform = function(data){
+            return $.param(data);
+        }
+        $http.post("MakeOrderServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+            transformRequest: transform
+        }).then(function successCallback(response) {
+            var message = response.data;
+            alert(message);
+        }, function errorCallback(response) {
+            alert("ouch");
+        });
+    }
+    // Create an order in xml form.
+    function createOrder(){
+        var order;
+        var date = new Date().toLocaleDateString();
+        date = date.replace("/","-");// Trans-to xml date type
+        var price = $scope.selectedColor.price +$scope.selectedShape.price +$scope.selectedSize.price;
+        order = "<?xml version=\"1.0\"?>"+
+            "<Order>"+
+            "<Date>"+date+"</Date>"+
+            "<Product>"+
+            "<Color>"+
+            "<Content>"+$scope.selectedColor.content+"</Content>"+
+            "<Price>"+$scope.selectedColor.price+"</Price>"+
+            "<Value>"+$scope.selectedColor.color+"</Value>"+
+            "</Color>"+
+            "<Shape>"+
+            "<Content>"+$scope.selectedShape.content+"</Content>"+
+            "<Price>"+$scope.selectedShape.price+"</Price>"+
+            "</Shape>"+
+            "<Size>"+
+            "<Width>"+$scope.selectedSize.width+"</Width>"+
+            "<Height>"+$scope.selectedSize.height+"</Height>"+
+            "<Price>"+$scope.selectedSize.price+"</Price>"+
+            "</Size>"+
+            "</Product>"+
+            "<Customer>"+
+            "<Name>"+$scope.Name+"</Name>"+
+            "<Address>"+$scope.Address+"</Address>"+
+            "<PhoneNo>"+$scope.PhoneNo+"</PhoneNo>"+
+            "</Customer>"+
+            "<Price>"+price+"</Price>"+
+            "</Order>";
+        return order;
+    }
+
 });
