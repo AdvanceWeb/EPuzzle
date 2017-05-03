@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Model>
+    <Outline>
+        <Up>0</Up>
+        <Right>0</Right>
+        <Bottom>0</Bottom>
+        <Left>0</Left>
+    </Outline>
+    <Shape>
+        <Content>
+            Triangle
+        </Content>
+        <Price>
+            25.0
+        </Price>
+    </Shape>
+    <Color>
+        <Content>
+            Red
+        </Content>
+        <Price>
+            5.0
+        </Price>
+    </Color>
+</Model>
