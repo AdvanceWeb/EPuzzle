@@ -1,14 +1,12 @@
 // Part3
 // This part is about showing our object on a VR canvas
-// a. Create scene to show the object using Three.js
-// b. The scene is append to the div whose id is "vrcontainer"
-// c. Default model will show in the canvas
-// d. When users change their choices, the scene should change corresponding to the info define in part2
-var container, stats, camera, scene, renderer, gl_geometry, gl_color, gl_shape, gl_width, gl_height;
+// a. Create scene to show the object using Three.js and append it to the div whose id is "vrcontainer"
+// b. Default model will show in the canvas
+// c. When users change their choices, the scene should change corresponding to the info define in part2
+var container, stats, camera, scene, renderer, gl_geometry, gl_color, gl_shape, gl_width, gl_height, gl_img, gl_img_geo;
 var mesh, mixer;
 var isSingle = true;
-var canvaswidth = 400;
-var canvasheight = 550;
+var isPreview = false;
 var p_x = 100;
 var p_y = 50;
 var p_z = 100;
@@ -18,6 +16,9 @@ animate();
 
 // init the canvas
 function init() {
+    var canvaswidth = 400;
+    var canvasheight = 620;
+
     // Get the container and set basic attributes
     container = document.getElementById("vrcontainer");
     camera = new THREE.OrthographicCamera( -220, 220, 220, -220, - canvaswidth, canvasheight );
@@ -104,16 +105,24 @@ var prevTime = Date.now();
 // Render
 function render() {
     var timer = Date.now() * 0.0002;
-    camera.position.x = Math.cos( timer ) * p_x;
-    camera.position.z = Math.sin( timer ) * p_z;
-    camera.lookAt(new THREE.Vector3(0,0,0));
-    // animation implement
-    if (mixer) {
-        var time = Date.now();
-        mixer.update( ( time - prevTime ) * 0.004 );
-        prevTime = time;
+    if(!isPreview) {
+        camera.position.x = Math.cos(timer) * p_x;
+        camera.position.z = Math.sin(timer) * p_z;
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        // animation implement
+        if (mixer) {
+            var time = Date.now();
+            mixer.update(( time - prevTime ) * 0.001);
+            prevTime = time;
+        }
+        renderer.render(scene, camera);
     }
-    renderer.render( scene, camera );
+    else{
+        camera.position.x = p_x * Math.cos(80);
+        camera.position.z = p_z * Math.sin(80);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
+    }
 }
 
 // Load mesh
@@ -130,8 +139,7 @@ function  loadMesh(obj, material) {
 function changeColor(color){
     gl_color = color;
     var material = new THREE.MeshPhongMaterial({
-        color: color,
-        side: THREE.DoubleSide
+        color: color
     });
     loadMesh(gl_geometry, material);
 }
@@ -159,10 +167,54 @@ function loadLayout(shape){
 function  changeSize(w, h) {
     gl_width = w;
     gl_height = h;
+    scene.remove(gl_img_geo);
+    loadImg();
 }
 
-// Show size of the puzzle
+// Show layout of the puzzle
 function  changeView() {
     isSingle = !isSingle;
     changeShape(gl_shape);
+    scene.remove(gl_img_geo);
+}
+
+// Preview , stop the timer, show the preview with img
+function  preview() {
+    isPreview = !isPreview;
+    if(!isPreview){
+        scene.remove(gl_img_geo);
+    }
+    else if(gl_img_geo!=undefined) {
+        if(isSingle){
+            changeView();
+        }
+        scene.add(gl_img_geo);
+    }
+}
+// Change img
+function changeImg(img){
+    gl_img = img;
+    scene.remove(gl_img_geo);
+    loadImg();
+}
+
+function loadImg(){
+    gl_img_geo = createMesh(new THREE.BoxGeometry(36*gl_width, 36*gl_height, 1), gl_img);
+    gl_img_geo.position.set(-10,100,-110);
+    gl_img_geo.rotation.x = 1.3;
+}
+
+function createMesh(geom, imageFile) {
+    var loader = new THREE.TextureLoader();
+    var texture = loader.load( imageFile, function ( texture ) {
+        texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
+        texture.offset.set( 0, 0 );
+        texture.repeat.set( 1, 1 );
+    });
+    var mat = new THREE.MeshPhongMaterial();
+    mat.map = texture;
+    mat.transparent = true;
+    mat.opacity = 0.7;
+    var mesh = new THREE.Mesh(geom, mat);
+    return mesh;
 }

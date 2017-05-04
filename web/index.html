@@ -178,7 +178,18 @@
                             </tbody>
                         </table>
                     </div>
-                    <p><a class="btn btn-default pull-left" onclick="changeView()" role="button">View Layout | View Single</a></p>
+                    <div>
+                        <p><a class="btn btn-default pull-left" style="display: inline;" onclick="changeView()" role="button">View Layout | View Single</a></p>
+                        <p><a class="btn btn-default pull-left" style="display: inline;" onclick="preview()" role="button">View Preview | View Box</a></p>
+                    </div>
+                    <div style="clear:both">
+                        <div class="file">
+                            <input type="file" file-model="myFile"/>
+                        </div>
+                        <div class="col-md-12">
+                            <img ng-src="{{imageSrc}}" style="max-width:300px;max-height:300px;margin:0 auto;display:block;" />
+                        </div>
+                    </div>
                     <p><a class="btn btn-default pull-right" href="#makeorder" role="button">Go to make an order &raquo;</a></p>
                 </div>
             </div>
@@ -284,11 +295,11 @@
         </div><!-- /.container -->
     </div>
 </div>
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <script src="bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 
-    <script src="js/index.js"></script>
-    <script src="js/vr.js"></script>
+<script src="js/index.js"></script>
+<script src="js/vr.js"></script>
 </body>
 </html>
