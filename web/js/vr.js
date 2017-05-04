@@ -20,7 +20,7 @@ animate();
 function init() {
     // Get the container and set basic attributes
     container = document.getElementById("vrcontainer");
-    camera = new THREE.OrthographicCamera( -200, 200, 200, -200, - canvaswidth, canvasheight );
+    camera = new THREE.OrthographicCamera( -220, 220, 220, -220, - canvaswidth, canvasheight );
     camera.position.x = p_x;
     camera.position.y = p_y;
     camera.position.z = p_z;
@@ -32,7 +32,7 @@ function init() {
     // Load object
     gl_color = 0xffffff;
     gl_shape = "egg";
-    loadObj("models/"+gl_shape+"/0012.obj", 0, 0, -50, 6);
+    loadObj("models/"+gl_shape+"/0012.obj", 0, 0, -50, 8);
 
     // Light
     loadLight();
@@ -141,7 +141,7 @@ function changeShape(shape){
     scene.remove( gl_geometry );
     gl_shape = shape;
     if(isSingle) {
-        loadObj("models/" + shape + "/0012.obj", 0, 0, -50, 6);
+        loadObj("models/" + shape + "/0012.obj", 0, 0, -50, 8);
     }
     else{
         loadLayout(shape);
