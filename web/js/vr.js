@@ -4,8 +4,9 @@
 // b. The scene is append to the div whose id is "vrcontainer"
 // c. Default model will show in the canvas
 // d. When users change their choices, the scene should change corresponding to the info define in part2
-var container, stats, camera, scene, renderer, gl_geometry, gl_color;
+var container, stats, camera, scene, renderer, gl_geometry, gl_color, gl_shape, gl_width, gl_height;
 var mesh, mixer;
+var isSingle = true;
 var canvaswidth = 400;
 var canvasheight = 550;
 var p_x = 100;
@@ -19,7 +20,7 @@ animate();
 function init() {
     // Get the container and set basic attributes
     container = document.getElementById("vrcontainer");
-    camera = new THREE.OrthographicCamera( -150, 150, 150, -150, - canvaswidth, canvasheight );
+    camera = new THREE.OrthographicCamera( -200, 200, 200, -200, - canvaswidth, canvasheight );
     camera.position.x = p_x;
     camera.position.y = p_y;
     camera.position.z = p_z;
@@ -29,7 +30,10 @@ function init() {
     // Grid
     loadGrid();
     // Load object
-    loadObj("models/"+"triangle"+"/0012.obj", 0, 0, -50, 5);
+    gl_color = 0xffffff;
+    gl_shape = "egg";
+    loadObj("models/"+gl_shape+"/0012.obj", 0, 0, -50, 6);
+
     // Light
     loadLight();
     // Render the scene
@@ -61,14 +65,9 @@ function  loadGrid() {
 function loadObj(path, dx, dy, dz, scale) {
     loader = new THREE.OBJLoader();
     loader.load(path, function(geo){
-        var material = new THREE.MeshLambertMaterial({
-            color: 0xffffff
+        material = new THREE.MeshLambertMaterial({
+            color: gl_color
         });
-        if(gl_color != undefined){
-            material = new THREE.MeshLambertMaterial({
-                color: gl_color
-            });
-        }
         gl_geometry = geo;
         loadMesh(gl_geometry, material);
         gl_geometry.scale.set(scale, scale, scale);
@@ -140,7 +139,30 @@ function changeColor(color){
 // Change the shape
 function changeShape(shape){
     scene.remove( gl_geometry );
-    loadObj("models/"+shape+"/0012.obj", 0, 0, -50, 5);
+    gl_shape = shape;
+    if(isSingle) {
+        loadObj("models/" + shape + "/0012.obj", 0, 0, -50, 6);
+    }
+    else{
+        loadLayout(shape);
+    }
     changeColor(gl_color);
     render();
+}
+
+// Layout
+function loadLayout(shape){
+    loadObj("models/layout/" + shape + "_" + gl_width +"_"+ gl_height + ".obj", 0, 0, -50, 2);
+}
+
+// Change the width and height of the puzzle layout
+function  changeSize(w, h) {
+    gl_width = w;
+    gl_height = h;
+}
+
+// Show size of the puzzle
+function  changeView() {
+    isSingle = !isSingle;
+    changeShape(gl_shape);
 }

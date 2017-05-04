@@ -81,6 +81,14 @@ app.controller('myCtrl', function($scope, $http) {
         }
     },true);
 
+    $scope.$watch('selectedSize', function(val){
+        console.log(val);
+        var obj = eval (val);
+        if(obj){
+            changeSize(obj.width, obj.height);
+        }
+    },true);
+
     $scope.makeOrder = function () {
         var order = createOrder();
         var data = {order: order};
@@ -96,6 +104,7 @@ app.controller('myCtrl', function($scope, $http) {
             alert("ouch");
         });
     }
+
     // Create an order in xml form.
     function createOrder(){
         var order;

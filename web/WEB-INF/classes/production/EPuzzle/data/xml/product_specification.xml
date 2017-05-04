@@ -22,29 +22,29 @@
         <Color>
             <Content>red</Content>
             <Price>5</Price>
-            <Value>0xff0000</Value>
+            <Value>0xff6666</Value>
         </Color>
         <Color>
             <Content>blue</Content>
             <Price>6</Price>
-            <Value>0x0000ff</Value>
+            <Value>0x99cccc</Value>
         </Color>
         <Color>
             <Content>green</Content>
             <Price>7</Price>
-            <Value>0x00ff00</Value>
+            <Value>0x99cc66</Value>
         </Color>
     </Colors>
     <Sizes>
         <Size>
-            <Width>25</Width>
-            <Height>25</Height>
+            <Width>10</Width>
+            <Height>5</Height>
             <Price>15</Price>
         </Size>
         <Size>
-            <Width>50</Width>
-            <Height>50</Height>
-            <Price>25</Price>
+            <Width>8</Width>
+            <Height>8</Height>
+            <Price>18</Price>
         </Size>
     </Sizes>
 </ProductSpecification>
