@@ -191,7 +191,7 @@ function  preview() {
         scene.add(gl_img_geo);
     }
 }
-// Change img
+
 function changeImg(img){
     gl_img = img;
     scene.remove(gl_img_geo);

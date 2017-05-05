@@ -1,25 +1,28 @@
 <?xml version="1.0"?>
-<Model>
-    <Outline>
-        <Up>0</Up>
-        <Right>0</Right>
-        <Bottom>0</Bottom>
-        <Left>0</Left>
-    </Outline>
-    <Shape>
-        <Content>
+<epuzzle:Model
+        xmlns:epuzzle = "http://www.FDU.14ss.epuzzle.com/model"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
+    <epuzzle:Outline>
+        <epuzzle:Up>0</epuzzle:Up>
+        <epuzzle:Right>0</epuzzle:Right>
+        <epuzzle:Bottom>0</epuzzle:Bottom>
+        <epuzzle:Left>0</epuzzle:Left>
+    </epuzzle:Outline>
+    <epuzzle:Shape>
+        <epuzzle:Content>
             Triangle
-        </Content>
-        <Price>
-            25.0
-        </Price>
-    </Shape>
-    <Color>
-        <Content>
+        </epuzzle:Content>
+        <epuzzle:Price>
+            25
+        </epuzzle:Price>
+    </epuzzle:Shape>
+    <epuzzle:Color>
+        <epuzzle:Content>
             Red
-        </Content>
-        <Price>
-            5.0
-        </Price>
-    </Color>
-</Model>
+        </epuzzle:Content>
+        <epuzzle:Price>
+            5
+        </epuzzle:Price>
+    </epuzzle:Color>
+</epuzzle:Model >

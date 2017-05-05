@@ -16,6 +16,8 @@
             <Height></Height>
             <Price></Price>
         </Size>
+        <Img>
+        </Img>
     </Product>
     <Customer>
         <Name></Name>

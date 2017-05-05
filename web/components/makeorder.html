@@ -1,0 +1,103 @@
+<!-- Make order -->
+<p class="pull-right"><a href="#">Back to top</a></p>
+<hr class="featurette-divider" id="makeorder">
+<div class="row featurette">
+    <div class="col-md-7">
+        <h2 class="featurette-heading">Get it</h2>
+        <p class="lead">Make an order to get your puzzle!</p>
+    </div>
+    <div class="col-md-5">
+        <div class="table-responsive">
+            <!--Create by the configure xml file!-->
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th><th>Item</th><th>Your choice</th><th>Price($)</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td><td>Color</td>
+                    <td>
+                        {{selectedColor.content}}
+                    </td>
+                    <td>
+                        {{selectedColor.price}}
+                    </td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <td>2</td><td>Shape</td>
+                    <td>
+                        {{selectedShape.content}}
+                    </td>
+                    <td>
+                        {{selectedShape.price}}
+                    </td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <td>3</td><td>Size</td>
+                    <td>
+                        {{selectedSize.size}}
+                    </td>
+                    <td>
+                        {{selectedSize.price}}
+                    </td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <td>4</td><td>Image</td>
+                    <td>
+                        <img ng-src="{{imageSrc}}" style="max-width:300px;max-height:300px;margin:0 auto;display:block;" />
+                    </td>
+                    <td>
+                        /
+                    </td>
+                </tr>
+                </tbody>
+
+                <tbody>
+                <tr>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>#</td>
+                    <td>
+                        {{selectedColor.price + selectedShape.price + selectedSize.price}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>#</th><th>Please enter your info.</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>Name </td><td><input type="text" placeholder="name " ng-model="Name"></td>
+                </tr>
+                <tr>
+                    <td>Address </td><td><input type="text" placeholder="address " ng-model="Address"></td>
+                </tr>
+                <tr>
+                    <td>Phone No. </td><td><input type="text" placeholder="telephone number " ng-model="PhoneNo"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <p><a class="btn btn-default pull-right" role="button" ng-click="makeOrder()">Make order right now! &raquo;</a></p>
+    </div>
+    <hr class="featurette-divider">
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2017 FDU 14ss</p>
+    </footer>
+</div>

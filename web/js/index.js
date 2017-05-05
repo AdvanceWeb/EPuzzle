@@ -1,4 +1,4 @@
-// jQuery
+// jQuery Used for bootstrap
 window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.min.js"><\/script>');
 
 // Angular
@@ -59,9 +59,6 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
             $scope.Sizes.push(tmp);
         }
     }
-
-    // Call back to response to the users' choices,
-    // e.g. when the selected Color is change, change the scene at the same time
     $scope.$watch('selectedColor', function(val){
         console.log(val);
         var obj = eval (val);
@@ -69,7 +66,6 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
             changeColor(obj.color);
         }
     },true);
-
     $scope.$watch('selectedShape', function(val){
         console.log(val);
         var obj = eval (val);
@@ -77,7 +73,6 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
             changeShape(obj.content);
         }
     },true);
-
     $scope.$watch('selectedSize', function(val){
         console.log(val);
         var obj = eval (val);
@@ -86,6 +81,7 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
         }
     },true);
 
+    // Create an order in xml form.
     $scope.makeOrder = function () {
         var order = createOrder();
         var data = {order: order};
@@ -101,8 +97,6 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
             alert("ouch");
         });
     }
-
-    // Create an order in xml form.
     function createOrder(){
         var order;
         var date = new Date().toLocaleDateString();
@@ -145,26 +139,44 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
             });
     };
 });
-
 app.directive('fileModel', ['$parse', function ($parse) {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attrs, ngModel) {
-                var model = $parse(attrs.fileModel);
-                var modelSetter = model.assign;
-                element.bind('change', function(event){
-                    scope.$apply(function(){
-                        modelSetter(scope, element[0].files[0]);
-                    });
-                    //附件预览
-                    scope.file = (event.srcElement || event.target).files[0];
-                    scope.getFile();
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs, ngModel) {
+            var model = $parse(attrs.fileModel);
+            var modelSetter = model.assign;
+            element.bind('change', function(event){
+                scope.$apply(function(){
+                    modelSetter(scope, element[0].files[0]);
                 });
-            }
-        };
-    }]);
-
-app.factory('fileReader', ["$q", "$log", function($q, $log){
+                //附件预览
+                scope.file = (event.srcElement || event.target).files[0];
+                scope.getFile();
+            });
+        }
+    };
+}]).
+    directive('navbar', function() {
+    return {
+        templateUrl: 'components/navbar.html'
+    };
+}).
+    directive('carousel', function() {
+    return {
+        templateUrl: 'components/carousel.html'
+    };
+}).
+    directive('workshop', function() {
+    return {
+        templateUrl: 'components/workshop.html'
+    };
+}).
+    directive('makeorder', function() {
+    return {
+        templateUrl: 'components/makeorder.html'
+    };
+}).
+    factory('fileReader', ["$q", "$log", function($q, $log){
     var onLoad = function(reader, deferred, scope) {
         return function () {
             scope.$apply(function () {
