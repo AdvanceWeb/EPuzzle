@@ -59,10 +59,18 @@ factory('fileReader', ["$q", "$log", function($q, $log){
     };
 }]);
 
+// Routers
 app.config(function($routeProvider, $locationProvider) {
+    //todo, here should add the login check in!
     $locationProvider.hashPrefix('');
     $routeProvider
         .when('/',{
+            templateUrl: 'components/login.html'
+        })
+        .when('/signup',{
+            templateUrl: 'components/signup.html'
+        })
+        .when('/home',{
             templateUrl: 'components/home.html'
         })
         .when('/workshop', {
@@ -78,7 +86,7 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'mypuzzleCtrl'
         })
         .otherwise({
-            redirectTo:''
+            redirectTo:'/home'
         });
 
     // configure html5
@@ -177,7 +185,7 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
 });
 app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location) {
     // Part 4
-    // Make an order according to the data.
+    // todo Make an order according to the data saved.
     // Create an order in xml form.
     // Post to MakeOrderServlet
     $scope.makeOrder = function () {
@@ -234,5 +242,5 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location) 
 app.controller("mypuzzleCtrl", function ($scope, $http, fileReader, $location) {
     // Part 5
     // Manager the customer's info & history orders.
-
+    //todo
 });
