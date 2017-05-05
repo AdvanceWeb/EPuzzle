@@ -4,7 +4,6 @@ window.jQuery || document.write('<script src="bootstrap/assets/js/vendor/jquery.
 // Angular
 var app = angular.module('myApp', ['ngRoute']);
 app.controller('myCtrl', function($scope, $http, fileReader) {
-
 });
 app.directive('fileModel', ['$parse', function ($parse) {
     return {
@@ -69,6 +68,14 @@ app.config(function($routeProvider, $locationProvider) {
         .when('/workshop', {
             templateUrl: 'components/workshop.html',
             controller: 'workshopCtrl'
+        })
+        .when('/makeorder', {
+            templateUrl: 'components/makeorder.html',
+            controller: 'makeorderCtrl'
+        })
+        .when('/mypuzzle', {
+            templateUrl: 'components/mypuzzle.html',
+            controller: 'mypuzzleCtrl'
         })
         .otherwise({
             redirectTo:'/'
@@ -160,7 +167,19 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
         }
     },true);
 
+    $scope.getFile = function () {
+        fileReader.readAsDataUrl($scope.file, $scope)
+            .then(function(result) {
+                $scope.imageSrc = result;
+                $scope.PuzzleVR.changeImg(result);
+            });
+    };
+});
+app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location) {
+    // Part 4
+    // Make an order according to the data.
     // Create an order in xml form.
+    // Post to MakeOrderServlet
     $scope.makeOrder = function () {
         var order = createOrder();
         var data = {order: order};
@@ -176,6 +195,7 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
             alert("ouch");
         });
     }
+
     function createOrder(){
         var order;
         var date = new Date().toLocaleDateString();
@@ -199,6 +219,7 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
             "<Height>"+$scope.selectedSize.height+"</Height>"+
             "<Price>"+$scope.selectedSize.price+"</Price>"+
             "</Size>"+
+            "<Img>"+$scope.imageSrc+"</Img>"+
             "</Product>"+
             "<Customer>"+
             "<Name>"+$scope.Name+"</Name>"+
@@ -209,12 +230,9 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
             "</Order>";
         return order;
     }
+});
+app.controller("mypuzzleCtrl", function ($scope, $http, fileReader, $location) {
+    // Part 5
+    // Manager the customer's info & history orders.
 
-    $scope.getFile = function () {
-        fileReader.readAsDataUrl($scope.file, $scope)
-            .then(function(result) {
-                $scope.imageSrc = result;
-                $scope.PuzzleVR.changeImg(result);
-            });
-    };
 });

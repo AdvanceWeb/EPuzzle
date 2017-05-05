@@ -175,6 +175,9 @@ function PuzzleVR(container) {
         scene.remove(gl_img_geo);
         loadImg();
         that.changeShape(gl_shape);
+        if(isPreview){
+            scene.add(gl_img_geo);
+        }
     }
 
 // Show layout of the puzzle
