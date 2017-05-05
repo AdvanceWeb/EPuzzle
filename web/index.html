@@ -12,6 +12,7 @@
     <link href="index.css" rel="stylesheet">
     <!-- Angular.js -->
     <script src="js/angular.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
     <!-- three.js -->
     <script src="js/threejs/build/three.js"></script>
     <script src="js/threejs/js/renderers/Projector.js"></script>
@@ -21,23 +22,34 @@
 </head>
 <body>
 <div ng-app="myApp" ng-controller="myCtrl">
+
     <!--NAVIGATION-->
     <div navbar></div>
-    <!--CAROUSEL-->
-    <div carousel></div>
+
+    <div ng-view></div>
+
     <!--MAIN PART-->
+    <!--<div class="container marketing">-->
+    <!--<hr class="featurette-divider" id="workshop">-->
+    <!--<div class="row featurette">-->
+    <!--&lt;!&ndash;WORKSHOP WITH HUMAN OPERATION&ndash;&gt;-->
+    <!--<div workshop></div>-->
+    <!--&lt;!&ndash;VR SHOW CANVAS&ndash;&gt;-->
+    <!--<div class="col-md-5 col-md-pull-7">-->
+    <!--<div id="vrcontainer" height="600" width="100%" ></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="container marketing">-->
+    <!--&lt;!&ndash;MAKE ORDER&ndash;&gt;-->
+    <!--<div makeorder></div>-->
+    <!--</div>-->
     <div class="container marketing">
-        <hr class="featurette-divider" id="workshop">
-        <div class="row featurette">
-            <!--WORKSHOP WITH HUMAN OPERATION-->
-            <div workshop></div>
-            <!--VR SHOW CANVAS-->
-            <div class="col-md-5 col-md-pull-7">
-                <div id="vrcontainer" height="600" width="100%" ></div>
-            </div>
-        </div>
-        <!--MAKE ORDER-->
-        <div makeorder></div>
+        <hr class="featurette-divider">
+        <footer>
+            <p>&copy; 2017 FDU 14ss</p>
+        </footer>
     </div>
 </div>
 
