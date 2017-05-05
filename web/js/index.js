@@ -21,6 +21,9 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
     $scope.Shapes = [];
     $scope.Colors = [];
     $scope.Sizes = [];
+    $scope.PuzzleVR = new PuzzleVR(document.getElementById("vrcontainer"));
+    $scope.changeView =$scope.PuzzleVR.changeView;
+    $scope.preview = $scope.PuzzleVR.preview;
 
     var specification;
     function setConfiguration() {
@@ -63,21 +66,21 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
         console.log(val);
         var obj = eval (val);
         if(obj){
-            changeColor(obj.color);
+            $scope.PuzzleVR.changeColor(obj.color);
         }
     },true);
     $scope.$watch('selectedShape', function(val){
         console.log(val);
         var obj = eval (val);
         if(obj){
-            changeShape(obj.content);
+            $scope.PuzzleVR.changeShape(obj.content);
         }
     },true);
     $scope.$watch('selectedSize', function(val){
         console.log(val);
         var obj = eval (val);
         if(obj){
-            changeSize(obj.width, obj.height);
+            $scope.PuzzleVR.changeSize(obj.width, obj.height);
         }
     },true);
 
@@ -135,7 +138,7 @@ app.controller('myCtrl', function($scope, $http, fileReader) {
         fileReader.readAsDataUrl($scope.file, $scope)
             .then(function(result) {
                 $scope.imageSrc = result;
-                changeImg(result);
+                $scope.PuzzleVR.changeImg(result);
             });
     };
 });
