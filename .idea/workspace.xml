@@ -859,10 +859,18 @@
       <workItem from="1493966886989" duration="5307000" />
       <workItem from="1493972471345" duration="76000" />
     </task>
+    <task id="LOCAL-00001" summary="create branch wangxin">
+      <created>1493973747965</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1493973747965</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52230000" />
+    <option name="totallyTimeSpent" value="52281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="825" extended-state="6" />
@@ -997,6 +1005,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="create branch wangxin" />
+    <option name="LAST_COMMIT_MESSAGE" value="create branch wangxin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
