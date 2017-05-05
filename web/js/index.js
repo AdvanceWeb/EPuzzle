@@ -78,7 +78,7 @@ app.config(function($routeProvider, $locationProvider) {
             controller: 'mypuzzleCtrl'
         })
         .otherwise({
-            redirectTo:'/'
+            redirectTo:''
         });
 
     // configure html5
