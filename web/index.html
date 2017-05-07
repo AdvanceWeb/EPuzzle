@@ -1,4 +1,4 @@
-<!-- Part1: View -->
+<!-- Part: View -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,11 +24,12 @@
     <script src="js/threejs/js/loaders/OBJLoader.js"></script>
 </head>
 <body>
+
 <div ng-app="myApp" ng-controller="myCtrl">
     <!--NAVIGATION-->
     <div navbar></div>
     <!--MAIN PART USING ROUTER-->
-    <div ng-view style="width:100%"></div>
+    <div ng-view></div>
     <div class="container marketing">
         <hr class="featurette-divider">
         <footer>
@@ -37,11 +38,15 @@
     </div>
 </div>
 
-<!-- Placed at the end of the document so the pages load faster -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 <script src="bootstrap/dist/js/bootstrap.min.js"></script>
-
 <script src="js/index.js"></script>
+<script src="components/home/home.js"></script>
+<script src="components/login/login.js"></script>
+<script src="components/signup/signup.js"></script>
+<script src="components/workshop/workshop.js"></script>
+<script src="components/makeorder/makeorder.js"></script>
+<script src="components/mypuzzle/mypuzzle.js"></script>
 <script src="js/vr.js"></script>
 </body>
 </html>
