@@ -1,14 +1,19 @@
-app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location) {
+app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, dataService) {
     // Part
     // todo Make an order according to the data saved.
     // Create an order in xml form.
     // Post to MakeOrderServlet
+    $scope.selectedColor = dataService.getSelectedColor();
+    $scope.selectedShape = dataService.getSelectedShape();
+    $scope.selectedSize = dataService.getSelectedSize();
+    $scope.imageSrc = dataService.getSelectedImgSrc();
+
     $scope.makeOrder = function () {
         var order = createOrder();
         var data = {order: order};
         var transform = function(data){
             return $.param(data);
-        }
+        };
         $http.post("MakeOrderServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
@@ -17,7 +22,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location) 
         }, function errorCallback(response) {
             alert("ouch");
         });
-    }
+    };
 
     function createOrder(){
         var order;

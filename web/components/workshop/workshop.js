@@ -46,7 +46,7 @@ factory('fileReader', ["$q", "$log", function($q, $log){
         readAsDataUrl: readAsDataURL
     };
 }]);
-app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
+app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, dataService) {
     // Part
     // This part is about loading information of our object
     // a. These information should be loaded from the configure file -> xml file
@@ -135,4 +135,9 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location) {
                 $scope.PuzzleVR.changeImg(result);
             });
     };
+
+    $scope.makeorder = function () {
+        dataService.saveOrder($scope.selectedColor,$scope.selectedShape,$scope.selectedSize,$scope.imageSrc);
+        $location.path('/makeorder');
+    }
 });
