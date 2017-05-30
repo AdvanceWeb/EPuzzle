@@ -138,7 +138,7 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
 
     $scope.makeorder = function () {
         compressImg();
-        dataService.saveOrder($scope.selectedColor,$scope.selectedShape,$scope.selectedSize,$scope.imageSrc);
+        dataService.saveOrder($scope.selectedColor,$scope.selectedShape,$scope.selectedSize,$scope.imageSrc,"");
         $location.path('/makeorder');
     };
 

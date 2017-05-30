@@ -3,12 +3,14 @@ app.service('dataService', function($http) {
     this.selectedShape;
     this.selectedSize;
     this.imageSrc;
+    this.overview;
 
-    this.saveOrder = function (selectedColor,selectedShape,selectedSize,imageSrc) {
+    this.saveOrder = function (selectedColor,selectedShape,selectedSize,imageSrc,overview) {
         this.selectedColor = selectedColor;
         this.selectedShape = selectedShape;
         this.selectedSize = selectedSize;
         this.imageSrc = imageSrc;
+        this.overview = overview;
     };
 
     this.getSelectedColor = function(){
@@ -27,6 +29,10 @@ app.service('dataService', function($http) {
         return this.imageSrc;
     };
 
+    this.getOverView = function(){
+        return this.overview;
+    };
+
     var that = this;
     this.getDetail = function ( productID){
         var data = {id: productID};
@@ -42,7 +48,7 @@ app.service('dataService', function($http) {
             var shape = {content : product.shape.content, price : product.shape.price};
             var size =  {size : product.size.size, width: product.size.width, height: product.size.height, price : product.size.price};
 
-            that.saveOrder(color,shape,size,product.imgSrc);
+            that.saveOrder(color,shape,size,product.imgSrc,product.overview);
         }, function errorCallback(response) {
             alert("ouch");
         });

@@ -6,7 +6,8 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
     $scope.selectedShape = dataService.getSelectedShape();
     $scope.selectedSize = dataService.getSelectedSize();
     $scope.imageSrc = dataService.getSelectedImgSrc();
-
+    $scope.overview = dataService.getOverView();
+    
     // Post to MakeOrderServlet
     $scope.makeOrder = function () {
         var order = createOrder();
