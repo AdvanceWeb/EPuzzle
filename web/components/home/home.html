@@ -51,7 +51,7 @@
             <img  ng-show="item.imgSrc" class="img-circle" src="{{item.imgSrc}}" alt="Generic placeholder image" width="160" height="160">
             <h2 ng-show="item.name">{{item.name}}</h2>
             <p ng-show="item.overview">{{item.overview}}</p>
-            <p ng-show="item.name"><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
+            <p ng-show="item.name"><a class="btn btn-default" ng-click="viewDetails(item.id)" role="button">View details! &raquo;</a></p>
         </div>
     </div>
 </div>

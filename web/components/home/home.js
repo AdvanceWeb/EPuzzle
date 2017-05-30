@@ -1,4 +1,4 @@
-app.controller("homeCtrl", function ($scope, $http, fileReader, $location) {
+app.controller("homeCtrl", function ($scope, $http, fileReader, $location, dataService) {
     // Part
     // todo get the products from the server
     // todo support the search function
@@ -16,11 +16,14 @@ app.controller("homeCtrl", function ($scope, $http, fileReader, $location) {
             var obj = response.data;
             var results = obj.results;
             $scope.products = results;
-
         }, function errorCallback(response) {
             alert("ouch");
         });
-    }
+    };
 
+    $scope.viewDetails = function (id) {
+        dataService.getDetail(id);
+        $location.path('/makeorder');
+    }
 
 });

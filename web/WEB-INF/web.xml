@@ -27,4 +27,12 @@
         <servlet-name>SearchServlet</servlet-name>
         <url-pattern>/SearchServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GetInfoServlet</servlet-name>
+        <servlet-class>GetInfoServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetInfoServlet</servlet-name>
+        <url-pattern>/GetInfoServlet</url-pattern>
+    </servlet-mapping>
 </web-app>
