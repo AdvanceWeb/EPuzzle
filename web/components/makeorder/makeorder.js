@@ -1,13 +1,13 @@
 app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, dataService) {
     // Part
-    // todo Make an order according to the data saved.
-    // Create an order in xml form.
-    // Post to MakeOrderServlet
+
+    // Make an order according to the data saved.
     $scope.selectedColor = dataService.getSelectedColor();
     $scope.selectedShape = dataService.getSelectedShape();
     $scope.selectedSize = dataService.getSelectedSize();
     $scope.imageSrc = dataService.getSelectedImgSrc();
 
+    // Post to MakeOrderServlet
     $scope.makeOrder = function () {
         var order = createOrder();
         var data = {order: order};
@@ -24,6 +24,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
         });
     };
 
+    // Create an order in xml form.
     function createOrder(){
         var order;
         var date = new Date().toLocaleDateString();

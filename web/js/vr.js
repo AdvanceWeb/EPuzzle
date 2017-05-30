@@ -1,4 +1,4 @@
-// Part3
+// Part
 // This part is about showing our object on a VR canvas
 // a. Create scene to show the object using Three.js and append it to the div whose id is "vrcontainer"
 // b. Default model will show in the canvas

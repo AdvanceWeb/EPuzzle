@@ -39,49 +39,19 @@
 <!--Search Puzzle-->
 <div class="container marketing text-center" style="height:100px;">
     <form class="form-search">
-        <input type="text" class="input-medium search-query" style="width: 60%;">
-        <button type="submit" class="btn">Search</button>
+        <input ng-model="keyword" type="text" class="input-medium search-query" style="width: 60%;">
+        <button class="btn" ng-click="search()">Search</button>
     </form>
 </div>
 
 <!--The Made Products-->
 <div class="container marketing">
     <div class="row">
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
-        </div>
-        <div class="col-lg-4">
-            <img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">
-            <h2>Ready Made</h2>
-            <p>Puzzle Sample0</p>
-            <p><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
+        <div class="col-lg-4" ng-repeat="item in products">
+            <img  ng-show="item.imgSrc" class="img-circle" src="{{item.imgSrc}}" alt="Generic placeholder image" width="160" height="160">
+            <h2 ng-show="item.name">{{item.name}}</h2>
+            <p ng-show="item.overview">{{item.overview}}</p>
+            <p ng-show="item.name"><a class="btn btn-default" href="#workshop" role="button">View details! &raquo;</a></p>
         </div>
     </div>
 </div>
