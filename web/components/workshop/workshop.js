@@ -137,7 +137,32 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
     };
 
     $scope.makeorder = function () {
+        compressImg();
         dataService.saveOrder($scope.selectedColor,$scope.selectedShape,$scope.selectedSize,$scope.imageSrc);
         $location.path('/makeorder');
+    };
+
+    // compress the image
+    function compressImg(){
+        var i = document.getElementById("productImg");
+        console.log($(i).width());
+        console.log($(i).height());
+        var compressSrc = compress(i).src;
+        $scope.imageSrc = compressSrc;
+    }
+
+    function  compress(source_img_obj, output_format) {
+        var mime_type = "image/jpeg";
+        if(output_format!=undefined && output_format=="png"){
+            mime_type = "image/png";
+        }
+        var cvs = document.createElement('canvas');
+        cvs.width = source_img_obj.naturalWidth;
+        cvs.height = source_img_obj.naturalHeight;
+        var ctx = cvs.getContext("2d").drawImage(source_img_obj, 0, 0);
+        var newImageData = cvs.toDataURL(mime_type, 0.1);
+        var result_image_obj = new Image();
+        result_image_obj.src = newImageData;
+        return result_image_obj;
     }
 });
