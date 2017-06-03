@@ -136,10 +136,24 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
             });
     };
 
+    // make order
     $scope.makeorder = function () {
-        compressImg();
-        dataService.saveOrder($scope.selectedColor,$scope.selectedShape,$scope.selectedSize,$scope.imageSrc,"");
-        $location.path('/makeorder');
+        if($scope.checkOrder()) {
+            compressImg();
+            dataService.saveOrder($scope.selectedColor, $scope.selectedShape, $scope.selectedSize, $scope.imageSrc, "");
+            $location.path('/makeorder');
+        }
+    };
+
+    // check complete
+    $scope.checkOrder = function(){
+        if($scope.selectedColor == undefined || $scope.selectedShape == undefined || $scope.selectedSize == undefined || $scope.imageSrc == undefined){
+            alert("The information of puzzle is not complete!")
+            return false;
+        }
+        else{
+            return true;
+        }
     };
 
     // compress the image
