@@ -1,4 +1,4 @@
-app.service('dataService', function($http) {
+app.service('dataService', function($http,$location) {
     //username and nickname
     this.username = "username";
     this.nickname = "nickname";
@@ -51,8 +51,9 @@ app.service('dataService', function($http) {
             var color = {content : product.color.content, price : product.color.price, color: parseInt(product.color.color,16)};
             var shape = {content : product.shape.content, price : product.shape.price};
             var size =  {size : product.size.size, width: product.size.width, height: product.size.height, price : product.size.price};
-
+            alert(product.overview);
             that.saveOrder(color,shape,size,product.imgSrc,product.overview);
+            $location.path('/makeorder');
         }, function errorCallback(response) {
             alert("ouch");
         });
