@@ -7,7 +7,20 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
     $scope.selectedSize = dataService.getSelectedSize();
     $scope.imageSrc = dataService.getSelectedImgSrc();
     $scope.overview = dataService.getOverView();
-    
+
+    // number of products, default is 0
+    $scope.number = 1;
+    $scope.username = dataService.getUserName();
+
+    $scope.minus = function() {
+        if($scope.number > 1){
+            $scope.number = $scope.number - 1;
+        }
+    };
+    $scope.add = function() {
+        $scope.number = $scope.number + 1;
+    };
+
     // Post to MakeOrderServlet
     $scope.makeOrder = function () {
         var order = createOrder();
@@ -50,9 +63,10 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
             "<Price>"+$scope.selectedSize.price+"</Price>"+
             "</Size>"+
             "<Img>"+$scope.imageSrc+"</Img>"+
+            "<Number>"+$scope.number+"</Number>"+
             "</Product>"+
             "<Customer>"+
-            "<Name>"+$scope.Name+"</Name>"+
+            "<Name>"+$scope.username+"</Name>"+
             "<Address>"+$scope.Address+"</Address>"+
             "<PhoneNo>"+$scope.PhoneNo+"</PhoneNo>"+
             "</Customer>"+

@@ -68,31 +68,35 @@
 
                     <tbody>
                     <tr>
-                        <td>#</td>
-                        <td>#</td>
-                        <td>#</td>
+                        <td>5</td>
+                        <td>Number</td>
+                        <td><button ng-click="minus()"> － </button><span> {{ number }} </span><button ng-click="add()"> ＋ </button></td>
                         <td>
-                            {{selectedColor.price + selectedShape.price + selectedSize.price}}
+                            {{(selectedColor.price + selectedShape.price + selectedSize.price) * number}}
                         </td>
                     </tr>
                     </tbody>
                 </table>
                 <table class="table table-striped">
                     <thead>
-                    <tr>
-                        <th>#</th><th>Confirm your info here</th>
-                    </tr>
+                        <tr>
+                            <th>#</th><th>Confirm your info here</th>
+                        </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>Name </td><td><input type="text" placeholder="name " ng-model="Name"></td>
-                    </tr>
-                    <tr>
-                        <td>Address </td><td><input type="text" placeholder="address " ng-model="Address"></td>
-                    </tr>
-                    <tr>
-                        <td>Phone No. </td><td><input type="text" placeholder="telephone number " ng-model="PhoneNo"></td>
-                    </tr>
+                        <tr>
+                            <td>Name </td><td><span>{{ username }}</span></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Address </td><td><input type="text" placeholder="address " ng-model="Address"></td>
+                        </tr>
+                    </tbody>
+                    <tbody>
+                        <tr>
+                            <td>Phone No. </td><td><input type="text" placeholder="telephone number " ng-model="PhoneNo"></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

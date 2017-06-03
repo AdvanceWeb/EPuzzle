@@ -1,4 +1,8 @@
 app.service('dataService', function($http) {
+    //username and nickname
+    this.username = "username";
+    this.nickname = "nickname";
+
     this.selectedColor;
     this.selectedShape;
     this.selectedSize;
@@ -52,7 +56,15 @@ app.service('dataService', function($http) {
         }, function errorCallback(response) {
             alert("ouch");
         });
-    }
+    };
+
+    this.getUserName = function(){
+        return this.username;
+    };
+
+    this.getNickName = function() {
+        return this.nickname;
+    };
 });
 
 
