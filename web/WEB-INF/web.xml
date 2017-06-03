@@ -35,4 +35,12 @@
         <servlet-name>GetInfoServlet</servlet-name>
         <url-pattern>/GetInfoServlet</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>GetOrdersServlet</servlet-name>
+        <servlet-class>GetOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetOrdersServlet</servlet-name>
+        <url-pattern>/GetOrdersServlet</url-pattern>
+    </servlet-mapping>
 </web-app>

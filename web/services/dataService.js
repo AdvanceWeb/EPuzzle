@@ -1,7 +1,7 @@
 app.service('dataService', function($http,$location) {
     //username and nickname
-    this.username = "username";
-    this.nickname = "nickname";
+    this.username = "Sophia";
+    this.nickname = "(～￣▽￣)～Sophia";
 
     this.selectedColor;
     this.selectedShape;

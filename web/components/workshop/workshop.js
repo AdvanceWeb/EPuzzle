@@ -107,21 +107,21 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
         }
     }
     $scope.$watch('selectedColor', function(val){
-        console.log(val);
+        // console.log(val);
         var obj = eval (val);
         if(obj){
             $scope.PuzzleVR.changeColor(obj.color);
         }
     },true);
     $scope.$watch('selectedShape', function(val){
-        console.log(val);
+        // console.log(val);
         var obj = eval (val);
         if(obj){
             $scope.PuzzleVR.changeShape(obj.content);
         }
     },true);
     $scope.$watch('selectedSize', function(val){
-        console.log(val);
+        // console.log(val);
         var obj = eval (val);
         if(obj){
             $scope.PuzzleVR.changeSize(obj.width, obj.height);
@@ -159,8 +159,8 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
     // compress the image
     function compressImg(){
         var i = document.getElementById("productImg");
-        console.log($(i).width());
-        console.log($(i).height());
+        // console.log($(i).width());
+        // console.log($(i).height());
         var compressSrc = compress(i).src;
         $scope.imageSrc = compressSrc;
     }

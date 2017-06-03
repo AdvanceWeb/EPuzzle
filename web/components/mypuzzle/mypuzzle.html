@@ -3,38 +3,26 @@
     <div style="background:url(img/puzzle2.jpg); height: 200px; center; background-size:cover"></div>
 </div>
 <div class="container marketing">
-    <div class="row featurette">
+    <div>
+        Hi, {{ nickname }} ! Here is the history of your order~!
+    </div>
+    <div class="row featurette col-lg-10">
         <ul>
-            <li style="min-height: 250px; display: block;">
+            <li style="min-height: 250px; display: block;" ng-repeat="order in orders">
                 <hr>
                 <div>
                     <a class="pull-left thumb-sm">
-                        <img style="width: 200px;height: 200px;" src="img/product0.jpg" class="img-polaroid" alt="puzzle img">
+                        <img style="width: 200px;height: 200px;" src="{{order.imgSrc}}" class="img-polaroid" alt="puzzle img">
                     </a>
-                    <div class="pull-right">
-                        <h3>Here is the order information of this customer</h3>
-                        <ul>
-                            <li>order id</li>
-                            <li>order date</li>
-                            <li>color shape size</li>
-                        </ul>
-                    </div>
-                </div>
-            </li>
-            <li style="min-height: 250px; display: block;">
-                <hr>
-                <div>
-                    <a class="pull-left thumb-sm">
-                        <img style="width: 200px;height: 200px;" src="img/product1.jpg" class="img-polaroid" alt="puzzle img">
-                    </a>
-                    <div class="pull-right">
-                        <h3>Here is the order information of this customer</h3>
-                        <ul>
-                            <li>order id</li>
-                            <li>order date</li>
-                            <li>color shape size</li>
-                        </ul>
-                    </div>
+                    <table class="table col-lg-6 pull-right" style="width: 50%;">
+                        <thead><tr><th>Date :</th><th>{{order.date}}</th></tr></thead>
+                        <tbody><tr><td>Color:</td><td>{{order.color.content}}</td></tr></tbody>
+                        <tbody><tr><td>Shape:</td><td>{{order.shape.content}}</td></tr></tbody>
+                        <tbody><tr><td>Size :</td><td>{{order.sizes.size}}</td></tr></tbody>
+                        <tbody><tr><td>Price:</td><td>{{order.totalPrice}}</td></tr></tbody>
+                        <tbody><tr><td>Address:</td><td>{{order.address}}</td></tr></tbody>
+                        <tbody><tr><td>PhoneNo:</td><td>{{order.phoneNo}}</td></tr></tbody>
+                    </table>
                 </div>
             </li>
         </ul>

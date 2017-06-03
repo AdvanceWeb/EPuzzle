@@ -32,7 +32,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
             transformRequest: transform
         }).then(function successCallback(response) {
             var message = response.data;
-            alert(message);
+            alert("Success!");
         }, function errorCallback(response) {
             alert("ouch");
         });
@@ -44,7 +44,8 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
         var date = new Date().toLocaleDateString();
         date = date.replace("/","-");// Trans-to xml date type
         var price = $scope.selectedColor.price +$scope.selectedShape.price +$scope.selectedSize.price;
-        order = "<?xml version=\"1.0\"?>"+
+        // order = "<?xml version=\"1.0\"?>"+
+        order = ""+
             "<Order>"+
             "<Date>"+date+"</Date>"+
             "<Product>"+
@@ -70,8 +71,9 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
             "<Address>"+$scope.Address+"</Address>"+
             "<PhoneNo>"+$scope.PhoneNo+"</PhoneNo>"+
             "</Customer>"+
-            "<Price>"+price+"</Price>"+
+            "<TotalPrice>"+price+"</TotalPrice>"+
             "</Order>";
+        console.log(order);
         return order;
     }
 });
