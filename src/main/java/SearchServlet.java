@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  * Created by wangxin on 30/05/2017.
@@ -18,36 +20,29 @@ public class SearchServlet extends HttpServlet {
             //todo handle the search
             String keyword = request.getParameter("keyword");
             // get data from the database
+            DBConnect connect = new DBConnect();
+            ResultSet rs = null;
+            rs=connect.getSearch("SELECT * FROM madeproducts WHERE name LIKE '%"+keyword+"%'");
+            String results="{\"results\":[" ;
+            while(rs.next()){
+                String product = StringUtils.join(
+                    new String[] {
+                            "\"name\":\""+rs.getString("name")+"\"",
+                            "\"id\":\""+rs.getString("id")+"\"",
+                            "\"imgSrc\":\""+rs.getString("imgSrc")+"\"",
+                            "\"overview\":\""+rs.getString("overview")+"\""},
+                    ",");
+                results+="{" + product + "},";
 
-            String product0 = StringUtils.join(
-                    new String[] {
-                            "\"name\":\"Grass\"",
-                            "\"id\":\"1\"",
-                            "\"imgSrc\":\"https://vinepair.com/wp-content/uploads/2017/05/GRASS-internal.jpg\"",
-                            "\"overview\":\"Grass theme puzzle.\""},
-                    ",");
-            String product1 = StringUtils.join(
-                    new String[] {
-                            "\"name\":\"Cat\"",
-                            "\"id\":\"2\"",
-                            "\"imgSrc\":\"http://img.mp.itc.cn/upload/20170210/eaa3278513374044bc27facd2de9efe7_th.jpg\"",
-                            "\"overview\":\"Cat theme puzzle.\""},
-                    ",");
-            String product2 = StringUtils.join(
-                    new String[] {
-                            "\"name\":\"Minions\"",
-                            "\"id\":\"3\"",
-                            "\"imgSrc\":\"http://desk.fd.zol-img.com.cn/t_s1366x768c5/g1/M00/0E/02/Cg-4jVOtBs2Ie6pxAANqqZZMvRsAAOoUALrkqgAA2rB295.jpg\"",
-                            "\"overview\":\"Minions theme puzzle.\""},
-                    ",");
-
-            String results = "{\"results\":[" +
-                    "{" + product0 + "},"+
-                    "{" + product1 + "},"+
-                    "{" + product2 + "}"+
-                    "]}";
+            }
+            results=results.substring(0,results.length()-1);
+            results+= "]}";
+            System.out.println("SearchServlet:"+results);
             out.write(results);
             out.close();
+            connect.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -7,35 +7,34 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
     $scope.selectedSize = dataService.getSelectedSize();
     $scope.imageSrc = dataService.getSelectedImgSrc();
     $scope.overview = dataService.getOverView();
-
-    // number of products, default is 0
-    $scope.number = 1;
-    $scope.username = dataService.getUserName();
-
-    $scope.minus = function() {
-        if($scope.number > 1){
-            $scope.number = $scope.number - 1;
-        }
-    };
-    $scope.add = function() {
-        $scope.number = $scope.number + 1;
-    };
-
     // Post to MakeOrderServlet
     $scope.makeOrder = function () {
         var order = createOrder();
-        var data = {order: order};
-        var transform = function(data){
-            return $.param(data);
-        };
-        $http.post("MakeOrderServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transform
-        }).then(function successCallback(response) {
-            var message = response.data;
-            alert("Success!");
-        }, function errorCallback(response) {
-            alert("ouch");
-        });
+        var username=dataService.getUsername();
+        if(username==null){
+            $location.path("/");
+        }else{
+            var orderId = Date.parse(new Date())+dataService.getUsername();
+            //console.log(orderId);
+            var data = {order: order,username:dataService.getUsername(),orderId:orderId};
+            var transform = function(data){
+                return $.param(data);
+            };
+            $http.post("MakeOrderServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                transformRequest: transform
+            }).then(function successCallback(response) {
+                var message = response.data;
+                //alert(message);
+                var res = message.results;
+                if(res!="success"){
+                    alert("购买失败,服务器未开启");
+                }else{
+                    $location.path("/home");
+                }
+            }, function errorCallback(response) {
+                alert("ouch");
+            });
+        }
     };
 
     // Create an order in xml form.
@@ -44,8 +43,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
         var date = new Date().toLocaleDateString();
         date = date.replace("/","-");// Trans-to xml date type
         var price = $scope.selectedColor.price +$scope.selectedShape.price +$scope.selectedSize.price;
-        // order = "<?xml version=\"1.0\"?>"+
-        order = ""+
+        order = "<?xml version=\"1.0\"?>"+
             "<Order>"+
             "<Date>"+date+"</Date>"+
             "<Product>"+
@@ -64,16 +62,14 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
             "<Price>"+$scope.selectedSize.price+"</Price>"+
             "</Size>"+
             "<Img>"+$scope.imageSrc+"</Img>"+
-            "<Number>"+$scope.number+"</Number>"+
             "</Product>"+
             "<Customer>"+
-            "<Name>"+$scope.username+"</Name>"+
+            "<Name>"+$scope.Name+"</Name>"+
             "<Address>"+$scope.Address+"</Address>"+
             "<PhoneNo>"+$scope.PhoneNo+"</PhoneNo>"+
             "</Customer>"+
-            "<TotalPrice>"+price+"</TotalPrice>"+
+            "<Price>"+price+"</Price>"+
             "</Order>";
-        console.log(order);
         return order;
     }
 });

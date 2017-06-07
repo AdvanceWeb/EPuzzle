@@ -12,6 +12,38 @@
         <url-pattern>/OnloadServlet</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>RegisterServlet</servlet-name>
+        <servlet-class>RegisterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>RegisterServlet</servlet-name>
+        <url-pattern>/RegisterServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CheckServlet</servlet-name>
+        <servlet-class>CheckServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CheckServlet</servlet-name>
+        <url-pattern>/CheckServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>UserOrdersServlet</servlet-name>
+        <servlet-class>UserOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserOrdersServlet</servlet-name>
+        <url-pattern>/UserOrdersServlet</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>MakeOrderServlet</servlet-name>
         <servlet-class>MakeOrderServlet</servlet-class>
     </servlet>
@@ -34,13 +66,5 @@
     <servlet-mapping>
         <servlet-name>GetInfoServlet</servlet-name>
         <url-pattern>/GetInfoServlet</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>GetOrdersServlet</servlet-name>
-        <servlet-class>GetOrdersServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetOrdersServlet</servlet-name>
-        <url-pattern>/GetOrdersServlet</url-pattern>
     </servlet-mapping>
 </web-app>

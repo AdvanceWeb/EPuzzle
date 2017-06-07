@@ -1,4 +1,8 @@
 import org.apache.commons.lang.StringUtils;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,52 +17,37 @@ import java.io.PrintWriter;
 public class GetInfoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        PrintWriter out = response.getWriter();
             request.setCharacterEncoding("UTF-8");
-            //todo handle the search
             String id = request.getParameter("id");
-            //todo get product according to id, from the database
-            String product = "";
-
-            if(id.equals("1")) {
-                product = StringUtils.join(
-                        new String[]{
-                                "\"color\":{\"content\":\"green\", \"price\":7, \"color\":\"0x99cc66\"}",
-                                "\"imgSrc\":\"https://vinepair.com/wp-content/uploads/2017/05/GRASS-internal.jpg\"",
-                                "\"size\":{\"size\":\"8*8\", \"width\":8, \"height\":8, \"price\" :18}",
-                                "\"shape\":{\"content\":\"egg\", \"price\":6}",
-                                "\"overview\":\"This is a theme of grass and glass~!\""
-                        },
-                        ",");
-            }
-            else if(id.equals("2")) {
-                product = StringUtils.join(
-                        new String[]{
-                                "\"color\":{\"content\":\"red\", \"price\":5, \"color\":\"0xff6666\"}",
-                                "\"imgSrc\":\"http://img.mp.itc.cn/upload/20170210/eaa3278513374044bc27facd2de9efe7_th.jpg\"",
-                                "\"size\":{\"size\":\"8*8\", \"width\":8, \"height\":8, \"price\" :18}",
-                                "\"shape\":{\"content\":\"triangle\", \"price\":8}",
-                                "\"overview\":\"This is a theme of little cute cat~!\""
-                        },
-                        ",");
-            }
-            else if(id.equals("3")) {
-                product = StringUtils.join(
-                        new String[]{
-                                "\"color\":{\"content\":\"blue\", \"price\":6, \"color\":\"0x99cccc\"}",
-                                "\"imgSrc\":\"http://desk.fd.zol-img.com.cn/t_s1366x768c5/g1/M00/0E/02/Cg-4jVOtBs2Ie6pxAANqqZZMvRsAAOoUALrkqgAA2rB295.jpg\"",
-                                "\"size\":{\"size\":\"8*8\", \"width\":8, \"height\":8, \"price\" :18}",
-                                "\"shape\":{\"content\":\"egg\", \"price\":6}",
-                                "\"overview\":\"This is a theme of minions banana!banana!banana!~!\""
-                        },
-                        ",");
-            }
+            XBaseConnect xBaseConnect = new XBaseConnect();
+            String product=xBaseConnect.getInfo(id);
+        Document document = null;
+        try {
+            document = DocumentHelper.parseText(product);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        }
+        Element root = document.getRootElement();
+            Element color = root.element("Color");
+            Element imgSrc=root.element("ImgSrc");
+            Element size=root.element("Size");
+            Element shape=root.element("Shape");
+            Element  overview=root.element("Overview");
+            String product_detail=StringUtils.join(new String[]{
+                                "\"color\":{\"content\":\""+color.element("Content").getText()+"\", \"price\":\""+color.element("Price").getText()+"\",\"color\":\""+color.element("Value").getText()+"\"}",
+                                "\"imgSrc\":\""+imgSrc.getText()+"\"",
+                               "\"size\":{\"size\":\""+size.element("Size").getText()+"\", \"width\":\""+size.element("Width").getText()+"\", \"height\":\""+size.element("Height").getText()+"\", \"price\" :\""+size.element("Price").getText()+"\"}",
+                                "\"shape\":{\"content\":\""+shape.element("Content").getText()+"\", \"price\":\""+shape.element("Price").getText()+"\"}",
+                                "\"overview\":\""+overview.getText()+"\""
+            },",");
             String results = "{\"product\":" +
-                    "{" + product + "}" +
+                    "{" + product_detail + "}" +
                     "}";
+            System.out.println("GetInfoServlet:"+results);
             out.write(results);
             out.close();
-        }
+
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
