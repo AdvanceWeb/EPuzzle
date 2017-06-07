@@ -9,12 +9,12 @@
     <div class="row featurette col-lg-10">
         <ul>
             <li style="min-height: 250px; display: block;" ng-repeat="order in orders">
-                <hr>
+                <hr style="clear: both;">
                 <div>
                     <a class="pull-left thumb-sm">
                         <img style="width: 200px;height: 200px;" src="{{order.imgSrc}}" class="img-polaroid" alt="puzzle img">
                     </a>
-                    <table class="table col-lg-6 pull-right" style="width: 50%;">
+                    <table class="table pull-right col-lg-6" style="width: 50%;">
                         <thead><tr><th>Date :</th><th>{{order.date}}</th></tr></thead>
                         <tbody><tr><td>Color:</td><td>{{order.color.content}}</td></tr></tbody>
                         <tbody><tr><td>Shape:</td><td>{{order.shape.content}}</td></tr></tbody>
@@ -24,6 +24,7 @@
                         <tbody><tr><td>PhoneNo:</td><td>{{order.phoneNo}}</td></tr></tbody>
                     </table>
                 </div>
+                <hr style="clear: both;">
             </li>
         </ul>
     </div>

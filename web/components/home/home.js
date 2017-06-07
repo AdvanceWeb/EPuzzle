@@ -1,7 +1,5 @@
 app.controller("homeCtrl", function ($scope, $http, fileReader, $location, dataService) {
     // Part
-    // todo get the products from the server
-    // todo support the search function
     $scope.keyword = "";
     $scope.products = [];
 
@@ -32,10 +30,9 @@ app.controller("homeCtrl", function ($scope, $http, fileReader, $location, dataS
         }).then(function successCallback(response) {
             var obj = response.data;
             var product = obj.product;
-            var color = {content : product.color.content, price : product.color.price, color: parseInt(product.color.color,16)};
-            var shape = {content : product.shape.content, price : product.shape.price};
-            var size =  {size : product.size.size, width: product.size.width, height: product.size.height, price : product.size.price};
-            console.log(color);
+            var color = {content : product.color.content, price : parseInt(product.color.price), color: parseInt(product.color.color,16)};
+            var shape = {content : product.shape.content, price : parseInt(product.shape.price)};
+            var size =  {size : product.size.size, width: product.size.width, height: product.size.height, price : parseInt(product.size.price)};
             dataService.saveOrder(color,shape,size,product.imgSrc,product.overview);
             $location.path('/makeorder');
         }, function errorCallback(response) {
