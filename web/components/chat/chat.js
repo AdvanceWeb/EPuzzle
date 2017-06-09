@@ -7,7 +7,7 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
     var socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom/" + $scope.username);
     function listen() {
         socket.onopen = function() {
-            $("#content").append("<div>Welcome! ↑↑↑↑↑ History ↑↑↑↑↑</div></br>");
+            $("#note").append("<div>Welcome!</div></br>");
         };
         socket.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
@@ -81,6 +81,8 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
                 for (i = 0; i < result.length; i++) {
                     $scope.items.push(result[i]);
                 }
+                $("#content").append("<div>↑↑↑↑↑ History ↑↑↑↑↑</div></br>");
+
                 var panel = document.getElementById("panel");
                 panel.scrollTop = (panel.scrollHeight);
             }
