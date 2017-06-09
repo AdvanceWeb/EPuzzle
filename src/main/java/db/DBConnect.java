@@ -1,4 +1,4 @@
-
+package db;
 
 import java.sql.*;
 
@@ -96,5 +96,36 @@ public class DBConnect {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public ResultSet executeQuery(String sql) throws SQLException {
+        System.out.println(sql);
+        rs = stmt.executeQuery(sql);
+        return rs;
+    }
+
+    public void insert(String sql) throws SQLException {
+        System.out.println(sql);
+        stmt.execute(sql);
+    }
+
+    public String getChatNum(String sender, String receiver) throws SQLException {
+        System.out.println("sender:" + sender + " receiver:" + receiver);
+        String chatNum = "";
+        ResultSet rs = stmt.executeQuery("SELECT `chat_number` FROM `web`.`chat_history` WHERE `user1`='" + sender +
+                "' AND `user2`='" + receiver + "';" );
+        if (rs.next()) {
+            chatNum = rs.getString(1);
+        } else {
+            rs = stmt.executeQuery("SELECT `chat_number` FROM `web`.`chat_history` WHERE `user2`='" + sender +
+                    "' AND `user1`='" + receiver + "';" );
+            if (rs.next()) {
+                chatNum = rs.getString(1);
+            } else {
+                System.out.println("user cannot find");
+            }
+        }
+        System.out.println("chatnum=" + chatNum);
+        return chatNum;
     }
 }

@@ -15,11 +15,11 @@
             <h3 class="panel-title">Barrage</h3>
         </div>
         <div style="max-height: 250px; overflow: scroll;" id="panel">
-            <div class="panel-body" id="content"></div>
             <div class="panel-body"  ng-repeat="item in items">
                 <div class="pull-left" ng-show="item.sender != username" onfocus="true">{{item.time}} - {{item.sender}} Say: <br> {{item.msg}}</div>
                 <div class="pull-right" ng-show="item.sender == username" onfocus="true">{{item.time}} - {{item.sender}} Say: <br> {{item.msg}}</div>
             </div>
+            <div class="panel-body" id="content"></div>
         </div>
     </div>
     <hr/>
