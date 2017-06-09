@@ -1,4 +1,7 @@
 app.service('dataService', function($http) {
+    // Connect chat
+    this.cusername;
+    // Products
     this.selectedColor;
     this.selectedShape;
     this.selectedSize;
@@ -48,6 +51,14 @@ app.service('dataService', function($http) {
 
     this.getOverView = function(){
         return this.overview;
+    };
+
+    this.setConnectUserName = function(cu){
+        this.cusername = cu;
+    };
+
+    this.getConnectUserName = function(){
+        return this.cusername;
     };
 
     var that = this;

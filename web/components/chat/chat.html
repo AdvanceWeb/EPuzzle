@@ -5,18 +5,20 @@
 <div class="container" style="padding-top:20px;" ng-keyup="enterEvent($event)">
     <div class="panel panel-primary">
         <div>
-            <span>Chat with: <input type="text" placeholder="user name" ng-model="c_username">
-                <button type="button" class="btn btn-block" ng-click="requestChat()">Connect</button>
-</span>
+            <div>
+                <span class="pull-left">Chat with: <input  type="text" placeholder="connect user name" ng-model="cusername" /></span>
+                <button type="button" class="btn pull-right" ng-click="requestChat()">Connect</button>
+            </div>
         </div>
+        <hr style="clear: both">
         <div class="panel-heading" style="background-color: #161616">
             <h3 class="panel-title">Barrage</h3>
         </div>
         <div style="max-height: 250px; overflow: scroll;" id="panel">
             <div class="panel-body" id="content"></div>
             <div class="panel-body"  ng-repeat="item in items">
-                <div class="pull-left" ng-show="item.sender != username" onfocus="true">{{item.time}}-{{item.sender}} : {{item.msg}}</div>
-                <div class="pull-right" ng-show="item.sender == username" onfocus="true">{{item.time}}-{{item.sender}} : {{item.msg}}</div>
+                <div class="pull-left" ng-show="item.sender != username" onfocus="true">{{item.time}} - {{item.sender}} Say: <br> {{item.msg}}</div>
+                <div class="pull-right" ng-show="item.sender == username" onfocus="true">{{item.time}} - {{item.sender}} Say: <br> {{item.msg}}</div>
             </div>
         </div>
     </div>
