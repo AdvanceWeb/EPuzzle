@@ -3,14 +3,14 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, dataS
     $scope.items = [];
     $scope.username =  dataService.getUserName();
 
-    var socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom");
+    var socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom/" + $scope.username);
     function listen() {
         socket.onopen = function() {
             $("#content").append("<kbd>Welcome!</kbd></br>");
         };
         socket.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
-            $("#content").append("<kbd margin-top: 10px;'>" + data.sender + " Say: " + data.message + "</kbd></br>");
+            $("#content").append("<kbd style='margin-top: 10px;'>" + data.sender + " Say: " + data.message + "</kbd></br>");
         };
         socket.onclose = function(evt) {
             $("#content").append("<kbd>" + "Close!" + "</kbd></br>");
@@ -48,8 +48,8 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, dataS
         //     alert("lost connection");
         // });
         var text = $scope.msg;
-        var sender = dataService.getUserName();
-        $("#content").append("<kbd margin-top: 10px;'>" + sender + " Say: " + text + "</kbd></br>");
+        var sender = $scope.username;
+        $("#content").append("<kbd style='margin-top: 10px; float: right; height: auto;'>" + sender + " Say: " + text + "</kbd></br>");
         //TODO:
         var msg = {
             "sender" : sender,

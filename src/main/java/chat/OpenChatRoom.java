@@ -6,6 +6,7 @@ import proxy.ChatProxy;
 
 import javax.servlet.http.HttpSession;
 import javax.websocket.*;
+import javax.websocket.server.PathParam;
 import javax.websocket.server.ServerEndpoint;
 import java.io.IOException;
 
@@ -14,16 +15,15 @@ import java.io.IOException;
  */
 
 @SuppressWarnings("serial")
-@ServerEndpoint(value="/chatroom",configurator=GetHttpSessionConfigurator.class)
+@ServerEndpoint(value="/chatroom/{username}")
 public class OpenChatRoom {
 
     @OnOpen
-    public void onOpen(Session session,EndpointConfig config) {
-        HttpSession httpSession= (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
-        String username = (String) httpSession.getAttribute("username");
+    public void onOpen(Session session,@PathParam("username")String username) {
         //加入用户池
         UserPool.add(session,username);
         System.out.println(username + " added to userpool!");
+        System.out.println("session id : " + session.getId());
     }
 
     @OnMessage
