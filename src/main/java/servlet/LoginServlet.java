@@ -1,4 +1,4 @@
-
+package servlet;
 
 import db.DBConnect;
 
@@ -12,6 +12,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Login
  * Created by dell on 2017/5/31.
  */
 
@@ -38,7 +39,7 @@ public class LoginServlet extends HttpServlet {
                 nickname = resultSet.getString(2);
                 if (password.equals(true_pass)) {
                     results = "{\"results\":\"success\",\"nickname\":\""+nickname+"\"}";
-                    System.out.println(results);
+                    //System.out.println(results);
                     request.getSession().setAttribute("username", username);
                 } else {
                     results = "{\"results\":\"failed\"}";

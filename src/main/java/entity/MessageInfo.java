@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 
 /**
+ * MessageInfo entity
  * Created by YI on 2017/6/4.
  */
 

@@ -18,7 +18,7 @@ app.controller("mypuzzleCtrl", function ($scope, $http, fileReader, $location,da
             var transform = function (data) {
                 return $.param(data);
             };
-            $http.post("UserOrdersServlet", data, {
+            $http.post("servlet.UserOrdersServlet", data, {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                 transformRequest: transform
             }).then(function successCallback(response) {

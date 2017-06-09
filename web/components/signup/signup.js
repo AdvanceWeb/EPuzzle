@@ -11,7 +11,7 @@ app.controller("signupCtrl", function ($scope, $http, fileReader, $location) {
         var transform = function (data) {
             return $.param(data);
         };
-        $http.post("CheckServlet", data, {
+        $http.post("servlet.CheckServlet", data, {
             headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
@@ -31,7 +31,7 @@ app.controller("signupCtrl", function ($scope, $http, fileReader, $location) {
         var transform = function(data){
             return $.param(data);
         };
-        $http.post("RegisterServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        $http.post("servlet.RegisterServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
             var obj = response.data;

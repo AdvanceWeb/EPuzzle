@@ -98,7 +98,7 @@ app.service('dataService', function($http, $location) {
         var transform = function(data){
             return $.param(data);
         };
-        $http.post("GetInfoServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        $http.post("servlet.GetInfoServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
             var obj = response.data;

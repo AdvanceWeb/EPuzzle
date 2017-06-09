@@ -1,3 +1,6 @@
+package servlet;
+
+import basex.XBaseConnect;
 import db.DBConnect;
 
 import javax.servlet.ServletException;

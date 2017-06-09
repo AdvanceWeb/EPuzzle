@@ -37,7 +37,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
                 var transform = function (data) {
                     return $.param(data);
                 };
-                $http.post("MakeOrderServlet", data, {
+                $http.post("servlet.MakeOrderServlet", data, {
                     headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
                     transformRequest: transform
                 }).then(function successCallback(response) {

@@ -5,67 +5,67 @@
          version="3.1">
     <servlet>
         <servlet-name>OnloadServlet</servlet-name>
-        <servlet-class>OnloadServlet</servlet-class>
+        <servlet-class>servlet.OnloadServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>OnloadServlet</servlet-name>
-        <url-pattern>/OnloadServlet</url-pattern>
+        <url-pattern>/servlet.OnloadServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>LoginServlet</servlet-class>
+        <servlet-class>servlet.LoginServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/LoginServlet</url-pattern>
+        <url-pattern>/servlet.LoginServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>RegisterServlet</servlet-class>
+        <servlet-class>servlet.RegisterServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/RegisterServlet</url-pattern>
+        <url-pattern>/servlet.RegisterServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>CheckServlet</servlet-name>
-        <servlet-class>CheckServlet</servlet-class>
+        <servlet-class>servlet.CheckServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CheckServlet</servlet-name>
-        <url-pattern>/CheckServlet</url-pattern>
+        <url-pattern>/servlet.CheckServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>UserOrdersServlet</servlet-name>
-        <servlet-class>UserOrdersServlet</servlet-class>
+        <servlet-class>servlet.UserOrdersServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>UserOrdersServlet</servlet-name>
-        <url-pattern>/UserOrdersServlet</url-pattern>
+        <url-pattern>/servlet.UserOrdersServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>MakeOrderServlet</servlet-name>
-        <servlet-class>MakeOrderServlet</servlet-class>
+        <servlet-class>servlet.MakeOrderServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>MakeOrderServlet</servlet-name>
-        <url-pattern>/MakeOrderServlet</url-pattern>
+        <url-pattern>/servlet.MakeOrderServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>SearchServlet</servlet-name>
-        <servlet-class>SearchServlet</servlet-class>
+        <servlet-class>servlet.SearchServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>SearchServlet</servlet-name>
-        <url-pattern>/SearchServlet</url-pattern>
+        <url-pattern>/servlet.SearchServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>GetInfoServlet</servlet-name>
-        <servlet-class>GetInfoServlet</servlet-class>
+        <servlet-class>servlet.GetInfoServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>GetInfoServlet</servlet-name>
-        <url-pattern>/GetInfoServlet</url-pattern>
+        <url-pattern>/servlet.GetInfoServlet</url-pattern>
     </servlet-mapping>
     <servlet>
         <servlet-name>ChatServlet</servlet-name>

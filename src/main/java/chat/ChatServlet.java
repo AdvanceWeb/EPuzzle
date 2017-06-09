@@ -2,7 +2,6 @@ package chat;
 
 import db.DBConnect;
 import entity.UserPool;
-
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -14,9 +13,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Chat
+ * Show history of chat
+ * Invite chat
  * Created by wangxin on 09/06/2017.
  */
 public class ChatServlet extends HttpServlet {
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");

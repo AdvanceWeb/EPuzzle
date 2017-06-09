@@ -1,7 +1,12 @@
+package basex;
+
+import basex.BaseXClient;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 /**
+ * This is a test for xbase and our server.
  * Created by dell on 2017/6/4.
  */
 public class Test {

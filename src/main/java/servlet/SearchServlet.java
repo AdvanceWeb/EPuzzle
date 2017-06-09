@@ -1,3 +1,5 @@
+package servlet;
+
 import db.DBConnect;
 import org.apache.commons.lang.StringUtils;
 
@@ -11,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * Search according to the key word.
  * Created by wangxin on 30/05/2017.
  */
 public class SearchServlet extends HttpServlet {
@@ -38,7 +41,7 @@ public class SearchServlet extends HttpServlet {
             }
             results=results.substring(0,results.length()-1);
             results+= "]}";
-            System.out.println("SearchServlet:"+results);
+            //System.out.println("servlet.SearchServlet:"+results);
             out.write(results);
             out.close();
             connect.close();

@@ -1,6 +1,7 @@
 package entity;
 
 /**
+ * Ack entity
  * Created by wangxin on 09/06/2017.
  */
 public class Ack {

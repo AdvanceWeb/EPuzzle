@@ -8,6 +8,7 @@ import javax.websocket.Session;
 import java.lang.reflect.Method;
 
 /**
+ * Chat proxy
  * Created by YI on 2017/6/4.
  */
 public class ChatProxy implements MethodInterceptor {

@@ -53,7 +53,7 @@ app.controller("workshopCtrl", function ($scope, $http, fileReader, $location, d
     // b. Then show in the corresponding place in the html page using Angular.js model
     $http({
         method: 'POST',
-        url: 'OnloadServlet'
+        url: 'servlet.OnloadServlet'
     }).then(function successCallback(response) {
         specification = response.data;
         setConfiguration();

@@ -10,7 +10,7 @@ app.controller("loginCtrl", function ($scope, $http, fileReader, $location, data
         var transform = function(data){
             return $.param(data);
         };
-        $http.post("LoginServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        $http.post("servlet.LoginServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
             var obj = response.data;

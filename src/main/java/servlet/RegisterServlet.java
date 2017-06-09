@@ -1,3 +1,5 @@
+package servlet;
+
 import db.DBConnect;
 
 import javax.servlet.ServletException;
@@ -9,35 +11,34 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 
 /**
- * Created by dell on 2017/6/3.
+ * Register a account
+ * Created by dell on 2017/5/31.
  */
-public class CheckServlet extends HttpServlet {
+
+public class RegisterServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-       System.out.println("check");
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String username=request.getParameter("username");
+        String password=request.getParameter("password");
+        String nickname =request.getParameter("nickname");
         DBConnect connect = new DBConnect();
-        String results;
-        boolean check_result = false;
+        PrintWriter out =response.getWriter();
+        String results="";
         try {
-            check_result=connect.check("select* from user where username ='"+username+"'");
+            connect.register("insert into user values('"+username+"','"+password+"','"+nickname+"')");
+            results = "{\"results\":\"success\"}";
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        PrintWriter out = response.getWriter();
-        if(!check_result){
-            results = "{\"results\":\"false\"}";
-        }else{
-            results = "{\"results\":\"true\"}";
-        }
-        connect.close();
         out.write(results);
+        connect.closeforInsert();
         out.close();
 
     }
-    protected void doGet(HttpServletRequest request, HttpServletResponse response){
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
     }
-
 }

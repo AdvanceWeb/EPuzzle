@@ -8,7 +8,7 @@ app.controller("homeCtrl", function ($scope, $http, fileReader, $location, dataS
         var transform = function(data){
             return $.param(data);
         };
-        $http.post("SearchServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        $http.post("servlet.SearchServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
             var obj = response.data;
@@ -25,7 +25,7 @@ app.controller("homeCtrl", function ($scope, $http, fileReader, $location, dataS
         var transform = function(data){
             return $.param(data);
         };
-        $http.post("GetInfoServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+        $http.post("servlet.GetInfoServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
             transformRequest: transform
         }).then(function successCallback(response) {
             var obj = response.data;

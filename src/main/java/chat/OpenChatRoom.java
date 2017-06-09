@@ -32,15 +32,15 @@ public class OpenChatRoom {
         }
         //加入用户池
         UserPool.add(session,username);
-        System.out.println(username + " added to userpool!");
-        System.out.println("session id : " + session.getId());
-        System.out.println("session id in pool : " + ((Session)UserPool.getUserPool().get(username)).getId());
+        // System.out.println(username + " added to userpool!");
+        // System.out.println("session id : " + session.getId());
+        // System.out.println("session id in pool : " + ((Session)UserPool.getUserPool().get(username)).getId());
     }
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         //给所有用户发送消息
-        System.out.println("onMessage： "+message);
+        //System.out.println("onMessage： "+message);
         try {// Ack?
             ObjectMapper objectMapper = new ObjectMapper();
             Ack ack = objectMapper.readValue(message, Ack.class);

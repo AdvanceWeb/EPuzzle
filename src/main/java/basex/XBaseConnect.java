@@ -1,3 +1,7 @@
+package basex;
+
+import basex.BaseXClient;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,9 +23,9 @@ public final class XBaseConnect {
 		try {
 			session = new BaseXClient("106.15.88.95", 1984, "admin", "admin");
 			session.execute("open orders");
-			System.out.println(session.info());
+			//System.out.println(session.info());
 			session.add("orders/" + orderId, new ByteArrayInputStream(input.getBytes()));
-			System.out.println(session.info());
+			//System.out.println(session.info());
 			session.execute("flush");
 			session.execute("close");
 			return "success";

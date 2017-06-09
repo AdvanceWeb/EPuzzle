@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * UserPool to save session and username.
  * Created by YI on 2017/6/4.
  */
 

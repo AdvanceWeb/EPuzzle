@@ -1,5 +1,7 @@
+// Chat
+// Chat with other customer or the seller.
+// Implement with WebSocket.
 app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filter, dataService) {
-    // chat part
     $scope.username =  dataService.getUserName();
     $scope.cusername = "";
     $scope.items = [];
@@ -70,23 +72,25 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
 
     $scope.emit = function () {
         var text = $scope.msg;
-        var sender = $scope.username;
-        var date = new Date();
-        var emitTime = $filter('date')(date, "yyyy-MM-dd hh:mm:ss");
+        if(text != "") {
+            var sender = $scope.username;
+            var date = new Date();
+            var emitTime = $filter('date')(date, "yyyy-MM-dd hh:mm:ss");
 
-        $("#content").append("<div class=\"pull-right\">" + emitTime + " - " + sender + " Say: <br>" + text + "</div><br><br>");
-        var panel = document.getElementById("panel");
-        panel.scrollTop = (panel.scrollHeight);
-        //TODO:
-        var msg = {
-            "sender" : sender,
-            "receiver" : $scope.cusername,
-            "message" : text,
-            "emitTime" : emitTime,
-            "close":false
-        };
-        socket.send(JSON.stringify(msg));
-        $scope.msg = "";
+            $("#content").append("<div class=\"pull-right\">" + emitTime + " - " + sender + " Say: <br>" + text + "</div><br><br>");
+            var panel = document.getElementById("panel");
+            panel.scrollTop = (panel.scrollHeight);
+            //TODO:
+            var msg = {
+                "sender": sender,
+                "receiver": $scope.cusername,
+                "message": text,
+                "emitTime": emitTime,
+                "close": false
+            };
+            socket.send(JSON.stringify(msg));
+            $scope.msg = "";
+        }
     };
 
     $scope.enterEvent = function(e) {

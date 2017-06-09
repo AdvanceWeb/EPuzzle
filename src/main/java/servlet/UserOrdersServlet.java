@@ -1,3 +1,6 @@
+package servlet;
+
+import basex.XBaseConnect;
 import db.DBConnect;
 import org.apache.commons.lang.StringUtils;
 
@@ -12,16 +15,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 /**
+ * Get the history of some customer's order.
  * Created by dell on 2017/6/4.
  */
 public class UserOrdersServlet extends HttpServlet {
+
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         PrintWriter out = resp.getWriter();
         String username=req.getParameter("username");
         DBConnect connect =new DBConnect();
         ArrayList<String> orderlists = new ArrayList<>();
-        System.out.println(username);
+
         try {
             ResultSet rs = connect.getOrders("select orderId from orders where username ='"+username+"'");
             while(rs.next()){
@@ -32,7 +37,7 @@ public class UserOrdersServlet extends HttpServlet {
         }
         XBaseConnect xBaseConnect =new XBaseConnect();
         String[] orderxml=xBaseConnect.getOrders(orderlists);
-        System.out.println("用户订单数量："+orderxml.length);
+
         String results="{\"results\":[" ;
         for(int i=0;i<orderxml.length;i++){
             String product = StringUtils.join(
@@ -46,7 +51,7 @@ public class UserOrdersServlet extends HttpServlet {
         if(results.equals("{\"results\":]}")){
             results = "{\"results\":[]}";
         }
-        System.out.println("用户订单数据："+results);
+
         connect.close();
         out.write(results);
         out.close();

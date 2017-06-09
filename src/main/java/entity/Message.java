@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import db.DBConnect;
 
 /**
+ * Message entity
  * Created by YI on 2017/6/4.
  */
 
@@ -20,7 +21,7 @@ public class Message {
             String receiver = messageInfo.getReceiver();
             String sender = messageInfo.getSender();
             Session targetSession = UserPool.get(receiver);
-            System.out.println("target session " + targetSession.getId());
+            //System.out.println("target session " + targetSession.getId());
             //屏蔽状态关闭的用户
             if (!session.isOpen()) {
                 UserPool.remove(receiver);

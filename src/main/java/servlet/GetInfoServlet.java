@@ -1,3 +1,6 @@
+package servlet;
+
+import basex.XBaseConnect;
 import org.apache.commons.lang.StringUtils;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -12,6 +15,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
+ * Get the information of one made product.
  * Created by wangxin on 30/05/2017.
  */
 public class GetInfoServlet extends HttpServlet {
@@ -44,10 +48,9 @@ public class GetInfoServlet extends HttpServlet {
         String results = "{\"product\":" +
                 "{" + product_detail + "}" +
                 "}";
-        System.out.println("GetInfoServlet:"+results);
+        //System.out.println("servlet.GetInfoServlet:"+results);
         out.write(results);
         out.close();
-
     }
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
