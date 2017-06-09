@@ -10,7 +10,7 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, dataS
         };
         socket.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
-            $("#content").append("<kbd style='color: #" + data.color + ";font-size: " + data.fontSize + ";margin-top: 10px;'>" + data.userName + " Say: " + data.message + "</kbd></br>");
+            $("#content").append("<kbd margin-top: 10px;'>" + data.sender + " Say: " + data.message + "</kbd></br>");
         };
         socket.onclose = function(evt) {
             $("#content").append("<kbd>" + "Close!" + "</kbd></br>");
@@ -48,15 +48,16 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, dataS
         //     alert("lost connection");
         // });
         var text = $scope.msg;
+        var sender = dataService.getUserName();
+        $("#content").append("<kbd margin-top: 10px;'>" + sender + " Say: " + text + "</kbd></br>");
+        //TODO:
         var msg = {
+            "sender" : sender,
+            "receiver" : "",
             "message" : text,
-            "color" : "#CECECE",
-            "bubbleColor" : "#2E2E2E",
-            "fontSize" : "12",
-            "fontType" : "黑体"
-        };
-        msg = JSON.stringify(msg);
-        socket.send(msg);
+            "emitTime" : ""
+        }
+        socket.send(JSON.stringify(msg));
             // $scope.items.push(result[0]);
         $scope.msg = "";
     };
@@ -67,27 +68,4 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, dataS
             $scope.emit();
         }
     }
-
-    // function encodeScript(data) {
-    //     if(null == data || "" == data) {
-    //         return "";
-    //     }
-    //     return data.replace("<", "&lt;").replace(">", "&gt;");
-    // }
-    //
-    // function emit() {
-    //     var text = $scope.msg;
-    //     var msg = {
-    //         "message" : text,
-    //         "color" : "#CECECE",
-    //         "bubbleColor" : "#2E2E2E",
-    //         "fontSize" : "12",
-    //         "fontType" : "黑体"
-    //     };
-    //     msg = JSON.stringify(msg);
-    //     socket.send(msg);
-    //     $("#content").append("<kbd style='color: #" + "CECECE" + ";float: right; font-size: " + 12 + ";'>" + text +  "</kbd><br/>");
-    //     $("#msg").val("");
-    // }
-
 });

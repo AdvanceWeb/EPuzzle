@@ -4,6 +4,7 @@ import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
 
+import javax.websocket.Session;
 import java.lang.reflect.Method;
 
 /**
@@ -21,7 +22,9 @@ public class ChatProxy implements MethodInterceptor {
     }
 
     public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
-        Object result = methodProxy.invokeSuper(o, objects);
-        return result;
+        if(method.getName().equals("send")) {
+            return  methodProxy.invokeSuper(o, objects);
+        }
+        return methodProxy.invokeSuper(o, objects);
     }
 }

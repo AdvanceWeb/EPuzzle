@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.websocket.Session;
 import java.io.IOException;
+import java.util.Set;
 
 /**
  * Created by YI on 2017/6/4.
@@ -11,19 +12,41 @@ import java.io.IOException;
 
 public class Message {
     public void send(String message, Session session) {
+//        ObjectMapper mapper = new ObjectMapper();
+//        try {
+//            MessageInfo messageInfo = mapper.readValue(message, MessageInfo.class);
+//            String receiver = messageInfo.getReceiver();
+//            Session targetSession = UserPool.get(receiver);
+//            //屏蔽状态关闭的用户
+//            if (!session.isOpen()) {
+//                UserPool.remove(receiver);
+//                return;
+//            }
+//            //发送消息
+//            //TODO:消息保存至数据库
+//            targetSession.getBasicRemote().sendText(messageInfo.getMessage());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         ObjectMapper mapper = new ObjectMapper();
         try {
+            //给所有用户发送消息
+            Set<String> keys = UserPool.getUserPool().keySet();
             MessageInfo messageInfo = mapper.readValue(message, MessageInfo.class);
-            String receiver = messageInfo.getReceiver();
-            Session targetSession = UserPool.get(receiver);
-            //屏蔽状态关闭的用户
-            if (!session.isOpen()) {
-                UserPool.remove(receiver);
-                return;
+            System.out.println("send! keys num = " + keys.size());
+            for (String key : keys) {
+                Session targetSession = UserPool.get(key);
+                //屏蔽状态关闭的用户
+                if (!targetSession.isOpen()) {
+                    UserPool.remove(targetSession.getId());
+                    continue;
+                }
+                //排除自己
+                if (targetSession.equals(session)) {
+                    continue;
+                }
+                targetSession.getBasicRemote().sendText(mapper.writeValueAsString(messageInfo));
             }
-            //发送消息
-            //TODO:消息保存至数据库
-            targetSession.getBasicRemote().sendText(messageInfo.getMessage());
         } catch (IOException e) {
             e.printStackTrace();
         }

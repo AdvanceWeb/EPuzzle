@@ -19,16 +19,17 @@ public class OpenChatRoom {
 
     @OnOpen
     public void onOpen(Session session,EndpointConfig config) {
-        System.out.println();
         HttpSession httpSession= (HttpSession) config.getUserProperties().get(HttpSession.class.getName());
         String username = (String) httpSession.getAttribute("username");
         //加入用户池
         UserPool.add(session,username);
+        System.out.println(username + " added to userpool!");
     }
 
     @OnMessage
     public void onMessage(String message, Session session) throws IOException {
         //给所有用户发送消息
+        System.out.println("onMessage!");
         ChatProxy.getInstance().getProxy(Message.class).send(message, session);
     }
 
