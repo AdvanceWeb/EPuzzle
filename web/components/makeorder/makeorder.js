@@ -26,7 +26,7 @@ app.controller("makeorderCtrl", function ($scope, $http, fileReader, $location, 
         if(checkOrder()) {
             var order = createOrder();
             var username = dataService.getUserName();
-            if (username == null) {
+            if (username == undefined || username == null) {
                 alert("Please sign in first!");
                 $location.path("/");
             }

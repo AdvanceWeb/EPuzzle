@@ -39,6 +39,10 @@ app.config(function($routeProvider, $locationProvider) {
             templateUrl: 'components/mypuzzle/mypuzzle.html',
             controller: 'mypuzzleCtrl'
         })
+        .when('/chat', {
+            templateUrl: 'components/chat/chat.html',
+            controller: 'chatCtrl'
+        })
         .otherwise({
             redirectTo:'/home'
         });

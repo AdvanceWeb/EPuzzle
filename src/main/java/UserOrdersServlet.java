@@ -42,6 +42,9 @@ public class UserOrdersServlet extends HttpServlet {
         }
         results=results.substring(0,results.length()-1);
         results+= "]}";
+        if(results.equals("{\"results\":]}")){
+            results = "{\"results\":[]}";
+        }
         System.out.println("用户订单数据："+results);
         connect.close();
         out.write(results);

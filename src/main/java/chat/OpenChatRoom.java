@@ -1,4 +1,4 @@
-package fdu;
+package chat;
 
 import entity.Message;
 import entity.UserPool;
@@ -13,13 +13,13 @@ import java.io.IOException;
  */
 
 @SuppressWarnings("serial")
-@ServerEndpoint("/chat")
+@ServerEndpoint("/chatroom")
 public class OpenChatRoom {
 
     @OnOpen
-    public void onOpen(Session session, String username) {
+    public void onOpen(Session session) {
         //加入用户池
-        UserPool.add(session,username);
+        UserPool.add(session,session.getId());
     }
 
     @OnMessage

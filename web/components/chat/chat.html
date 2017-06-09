@@ -1,0 +1,29 @@
+<!--Chat-->
+<div id="myCarousel" class="carousel slide" data-ride="carousel" style="height: 205px">
+    <div style="background:url(img/puzzle2.jpg); height: 200px; center; background-size:cover"></div>
+</div>
+<div class="container" style="padding-top:20px;" ng-keyup="enterEvent($event)">
+    <div class="panel panel-primary">
+        <div>
+            <span>Chat with: <input type="text" placeholder="user name" ng-model="c_username">
+                <button type="button" class="btn btn-block" ng-click="requestChat()">Connect</button>
+</span>
+        </div>
+        <div class="panel-heading" style="background-color: #161616">
+            <h3 class="panel-title">Barrage</h3>
+        </div>
+        <div style="max-height: 250px; overflow: scroll;" id="panel">
+            <div class="panel-body" id="content"></div>
+            <div class="panel-body"  ng-repeat="item in items">
+                <div class="pull-left" ng-show="item.sender != username" onfocus="true">{{item.time}}-{{item.sender}} : {{item.msg}}</div>
+                <div class="pull-right" ng-show="item.sender == username" onfocus="true">{{item.time}}-{{item.sender}} : {{item.msg}}</div>
+            </div>
+        </div>
+    </div>
+    <hr/>
+    <input type="text" class="form-control" placeholder="Type here..." aria-describedby="sizing-addon1" ng-model="msg" />
+    <hr/>
+
+    <hr/>
+    <button type="button" class="btn btn-default btn-block" ng-click="emit()">Emit</button>
+</div>

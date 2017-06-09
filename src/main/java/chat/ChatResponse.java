@@ -1,4 +1,4 @@
-package fdu;
+package chat;
 
 /**
  * Created by YI on 2017/6/4.
