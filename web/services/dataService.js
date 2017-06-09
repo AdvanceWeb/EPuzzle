@@ -1,19 +1,37 @@
-app.service('dataService', function($http) {
+app.service('dataService', function($http, $location) {
     // Connect chat
     this.cusername;
+    // Socket Session
+    this.socket;
     // Products
     this.selectedColor;
     this.selectedShape;
     this.selectedSize;
     this.imageSrc;
     this.overview;
-    //全局用户名及昵称
+    // Username and nickname (global)
     this.username;
     this.nickname;
-    //登录调用
+    // log in / sign in
     this.login = function (username,nickname) {
         this.username=username;
         this.nickname=nickname;
+    };
+    // log out / sign out
+    this.logout = function () {
+        this.cusername = undefined;
+        if(this.socket != undefined){
+            this.socket.close();
+        }
+        this.socket  = undefined;
+        this.selectedColor  = undefined;
+        this.selectedShape  = undefined;
+        this.selectedSize  = undefined;
+        this.imageSrc  = undefined;
+        this.overview  = undefined;
+        this.username  = undefined;
+        this.nickname  = undefined;
+        $location.path("/");
     };
 
     this.getUserName = function () {
@@ -61,7 +79,19 @@ app.service('dataService', function($http) {
         return this.cusername;
     };
 
+    this.setSockect = function() {
+        if(this.socket != undefined){// close the old one
+            this.socket.close();
+        }
+        this.socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom/" + this.username);
+    };
+
+    this.getSocket = function(){
+        return this.socket;
+    };
+
     var that = this;
+    // Get the detail of made product~
     this.getDetail = function (productID){
         var data = {id: productID};
         print("js"+productID);

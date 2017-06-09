@@ -12,6 +12,7 @@ public class MessageInfo implements Serializable {
     private String receiver;
     private String message;
     private String emitTime = LocalDateTime.now().toString().replace("T", " ");
+    private boolean close;
 
     public MessageInfo() {
     }
@@ -54,4 +55,11 @@ public class MessageInfo implements Serializable {
         this.emitTime = emitTime;
     }
 
+    public boolean isClose() {
+        return close;
+    }
+
+    public void setClose(boolean close) {
+        this.close = close;
+    }
 }

@@ -4,33 +4,69 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
     $scope.cusername = "";
     $scope.items = [];
 
-    var socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom/" + $scope.username);
+    if ($scope.username == undefined || $scope.username == null) {
+        alert("Please sign in first!");
+        dataService.logout();
+    }
+
+    var socket = dataService.getSocket();
+    if(socket){
+        $("#note").append("<div>Welcome!</div></br>");
+    }
     function listen() {
         socket.onopen = function() {
-            $("#note").append("<div>Welcome!</div></br>");
         };
         socket.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
-            $("#content").append("<div class=\"pull-left\">"+ data.emitTime + " - " + data.sender + " Say: <br>" + data.message + "</div><br><br>");
-            var panel = document.getElementById("panel");
-            panel.scrollTop = (panel.scrollHeight);
+            if(data.ack){
+                alert("connet to " + data.username);
+                $scope.cusername = data.username;
+                $scope.requestChat();
+            }
+            else if(data.username != undefined){
+                alert("You're refused by: " + $scope.cusername + ". Hahaha!");
+            }
+            else if(data.invite){
+                if(window.confirm(data.sender+" invite you to chat~!")){
+                    var m = {
+                        "ack" : true,
+                        "username":$scope.username,
+                        "cusername": data.sender
+                    };
+                    $scope.cusername = data.sender;
+                    socket.send(JSON.stringify(m));
+                    $scope.requestChat();
+                }else{
+                    var m = {
+                        "ack" : false,
+                        "username":$scope.username,
+                        "cusername": data.sender
+                    };
+                    socket.send(JSON.stringify(m));
+                }
+            }
+            else{
+                if(data.close) {
+                    alert("This account is be used again! Please re-sign-in.");
+                    $location.path("/");
+                }else{
+                    $("#content").append("<div class=\"pull-left\">" + data.emitTime + " - " + data.sender + " Say: <br>" + data.message + "</div><br><br>");
+                    var panel = document.getElementById("panel");
+                    panel.scrollTop = (panel.scrollHeight);
+                }
+            }
         };
         socket.onclose = function(evt) {
-            $("#content").append("<div>" + "Close!" + "</div></br>");
-        }
+            $("#content").append("<div>" + "The connection is closed, or your friend is not online yet." + "</div></br>");
+        };
         socket.onerror = function(evt) {
-            $("#content").append("<div>" + "ERROR!" + "</div></br>");
-        }
+            $("#content").append("<div>" + "Oh, network error! " + "</div></br>");
+        };
     }
 
     $(function() {
         listen();
     });
-
-    if ($scope.username == undefined || $scope.username == null) {
-        alert("Please sign in first!");
-        $location.path("/");
-    }
 
     $scope.emit = function () {
         var text = $scope.msg;
@@ -46,7 +82,8 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
             "sender" : sender,
             "receiver" : $scope.cusername,
             "message" : text,
-            "emitTime" : emitTime
+            "emitTime" : emitTime,
+            "close":false
         };
         socket.send(JSON.stringify(msg));
         $scope.msg = "";
@@ -59,39 +96,47 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
         }
     };
 
-    $scope.requestChat = function(){
-        var data = {username: dataService.getUserName(), cusername: $scope.cusername};
-        var transform = function (data) {
-            return $.param(data);
-        };
-        $http.post("chat.ChatServlet", data, {
-            headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transform
-        }).then(function successCallback(response) {
-            var obj = response.data;
-            var result = obj.result;
+    $scope.requestChat = function() {
+        if ($scope.cusername == $scope.username) {
+            alert("Cannot talk to yourself! Are you crazy?");
+        }
+        else if($scope.cusername != undefined){
+            var data = {username: dataService.getUserName(), cusername: $scope.cusername};
+            var transform = function (data) {
+                return $.param(data);
+            };
+            $("#content").empty();// empty the content
+            $scope.items = [];// empty the history
 
-            // if connect
-            if(obj.status == "success") {
-                dataService.setConnectUserName($scope.cusername);
-                // Show history
-
-                $scope.items = [];
-                var i = 0;
-                for (i = 0; i < result.length; i++) {
-                    $scope.items.push(result[i]);
+            $http.post("chat.ChatServlet", data, {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                transformRequest: transform
+            }).then(function successCallback(response) {
+                var obj = response.data;
+                if (obj == "wait!") {
+                    // wait...
                 }
-                $("#content").append("<div>↑↑↑↑↑ History ↑↑↑↑↑</div></br>");
-
-                var panel = document.getElementById("panel");
-                panel.scrollTop = (panel.scrollHeight);
-            }
-            else{
-                alert("You're refused by: " + $scope.cusername + ". Hahaha!");
-            }
-        }, function errorCallback(response) {
-            alert("lost connection");
-        });
+                else {
+                    var result = obj.result;
+                    // if connect
+                    if (obj.status == "success") {
+                        dataService.setConnectUserName($scope.cusername);
+                        // Show history
+                        var i = 0;
+                        for (i = 0; i < result.length; i++) {
+                            $scope.items.push(result[i]);
+                        }
+                        $("#content").append("<div id=\"history\">↑↑↑↑↑ History ↑↑↑↑↑</div></br>");
+                        var panel = document.getElementById("panel");
+                        panel.scrollTop = (panel.scrollHeight);
+                    }
+                    else {
+                        alert("You're refused by: " + $scope.cusername + ". Hahaha!");
+                    }
+                }
+            }, function errorCallback(response) {
+                alert("lost connection");
+            });
+        }
     }
-
 });

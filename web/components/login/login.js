@@ -17,6 +17,7 @@ app.controller("loginCtrl", function ($scope, $http, fileReader, $location, data
             var results = obj.results;
             if(results=="success"){
                 dataService.login($scope.username,obj.nickname);
+                dataService.setSockect();
                 $location.path('/home');
             }else{
                 $scope.validation=true;
