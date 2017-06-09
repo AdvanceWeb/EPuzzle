@@ -37,6 +37,7 @@ public class LoginServlet extends HttpServlet {
                 if (password.equals(true_pass)) {
                     results = "{\"results\":\"success\",\"nickname\":\""+nickname+"\"}";
                     System.out.println(results);
+                    request.getSession().setAttribute("username", username);
                 } else {
                     results = "{\"results\":\"failed\"}";
                 }
