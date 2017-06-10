@@ -31,7 +31,7 @@
                             <label class="sr-only" for="form-password">Password</label>
                             <input type="password" name="form-password" placeholder="Password..." class="form-password form-control" id="form-password" ng-model="password">
                         </div>
-                        <p><a class="btn btn-default btn-large btn-block" role="button" ng-click="register()">Sign up~</a></p>
+                        <p><a class="btn btn-default btn-large btn-block" role="button" ng-click="register()" ng-if="!validation">Sign up~</a></p>
                     </form>
                 </div>
             </div>

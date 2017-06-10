@@ -27,21 +27,26 @@ app.controller("signupCtrl", function ($scope, $http, fileReader, $location) {
         });
     };
     $scope.register = function () {
-        var data = {username:$scope.username,password:$scope.password,nickname:$scope.nickname};
-        var transform = function(data){
-            return $.param(data);
-        };
-        $http.post("servlet.RegisterServlet", data, {headers: { 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
-            transformRequest: transform
-        }).then(function successCallback(response) {
-            var obj = response.data;
-            var results = obj.results;
-            if(results=="success"){
-                $location.path('/');
-            }
-        }, function errorCallback(response) {
-            alert("lost connection");
-        });
+        if ($scope.username == "" || $scope.nickname == "" || $scope.password == "") {
+            alert("he information can not be emptyT.");
+        } else {
+            var data = {username: $scope.username, password: $scope.password, nickname: $scope.nickname};
+            var transform = function (data) {
+                return $.param(data);
+            };
+            $http.post("servlet.RegisterServlet", data, {
+                headers: {'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'},
+                transformRequest: transform
+            }).then(function successCallback(response) {
+                var obj = response.data;
+                var results = obj.results;
+                if (results == "success") {
+                    $location.path('/');
+                }
+            }, function errorCallback(response) {
+                alert("lost connection");
+            });
+        }
     };
 
 });
