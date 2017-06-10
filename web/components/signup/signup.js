@@ -28,7 +28,7 @@ app.controller("signupCtrl", function ($scope, $http, fileReader, $location) {
     };
     $scope.register = function () {
         if ($scope.username == "" || $scope.nickname == "" || $scope.password == "") {
-            alert("he information can not be emptyT.");
+            alert("The information can not be empty.");
         } else {
             var data = {username: $scope.username, password: $scope.password, nickname: $scope.nickname};
             var transform = function (data) {
