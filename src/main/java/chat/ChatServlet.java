@@ -25,6 +25,8 @@ public class ChatServlet extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String username = request.getParameter("username");
         String connect_username = request.getParameter("cusername");
+        String isCallBack = request.getParameter("callback");
+        System.out.println(isCallBack);
         PrintWriter out = response.getWriter();
 
         String status = "success";
@@ -32,7 +34,7 @@ public class ChatServlet extends HttpServlet {
         try {
             String chatNum = connect.getChatNum(username,connect_username);
             if (chatNum.equals("")) {
-                receiverAck(username, connect_username);
+                receiverAck(username, connect_username, isCallBack);
                 out.write("wait!");
                 try {
                     Thread.sleep(2000);
@@ -41,6 +43,7 @@ public class ChatServlet extends HttpServlet {
                 }
             }
             else {
+                receiverAck(username, connect_username,isCallBack);
                 ResultSet rs = connect.executeQuery("SELECT * FROM `web`.`message` WHERE `chat_number`='" + chatNum + "';");
                 String result = "{ \"result\": [";
                 while (rs.next()) {
@@ -65,11 +68,11 @@ public class ChatServlet extends HttpServlet {
         doPost(request,response);
     }
 
-    protected void receiverAck(String username, String cusername){
+    protected void receiverAck(String username, String cusername, String isCallBack){
         if(UserPool.getUserPool().containsKey(cusername)){
             Session s = (Session) UserPool.getUserPool().get(cusername);
             try {
-                s.getBasicRemote().sendText("{\"invite\":\"true\", \"sender\":\""+username+"\"}");
+                s.getBasicRemote().sendText("{\"invite\":\"true\", \"sender\":\"" + username + "\", \"callback\":\""+isCallBack+"\"}");
             } catch (IOException e) {
                 e.printStackTrace();
             }

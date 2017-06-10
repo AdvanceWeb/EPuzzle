@@ -83,6 +83,8 @@ app.service('dataService', function($http, $location) {
         if(this.socket != undefined){// close the old one
             this.socket.close();
         }
+        // todo
+        //this.socket = new WebSocket("ws://localhost:8080/EPuzzle/chatroom/" + this.username);
         this.socket = new WebSocket("ws://106.15.88.95:8080/EPuzzle/chatroom/" + this.username);
     };
 

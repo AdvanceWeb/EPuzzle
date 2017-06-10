@@ -21,30 +21,47 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
         socket.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
             if(data.ack){
-                alert("connet to " + data.username);
-                $scope.cusername = data.username;
-                $scope.requestChat();
+                if(data.isend){
+                    alert(data.username + " is offline!");
+                    $scope.cusername = "";
+                    dataService.setConnectUserName($scope.cusername);
+                }
+                else {
+                    alert("connet to " + data.username);
+                    $scope.cusername = data.username;
+                    dataService.setConnectUserName($scope.cusername);
+                    $scope.requestChat("false");
+                }
             }
             else if(data.username != undefined){
                 alert("You're refused by: " + $scope.cusername + ". Hahaha!");
+                $scope.cusername = "";
+                dataService.setConnectUserName($scope.cusername);
+
             }
             else if(data.invite){
-                if(window.confirm(data.sender+" invite you to chat~!")){
-                    var m = {
-                        "ack" : true,
-                        "username":$scope.username,
-                        "cusername": data.sender
-                    };
-                    $scope.cusername = data.sender;
-                    socket.send(JSON.stringify(m));
-                    $scope.requestChat();
-                }else{
-                    var m = {
-                        "ack" : false,
-                        "username":$scope.username,
-                        "cusername": data.sender
-                    };
-                    socket.send(JSON.stringify(m));
+                if(!data.callback) {
+                    if (window.confirm(data.sender + " invite you to chat~!")) {
+                        $scope.endChat();
+                        var m = {
+                            "ack": true,
+                            "isend": false,
+                            "username": $scope.username,
+                            "cusername": data.sender
+                        };
+                        $scope.cusername = data.sender;
+                        dataService.setConnectUserName($scope.cusername);
+                        socket.send(JSON.stringify(m));
+                        $scope.requestChat("true");
+                    } else {
+                        var m = {
+                            "ack": false,
+                            "isend": false,
+                            "username": $scope.username,
+                            "cusername": data.sender
+                        };
+                        socket.send(JSON.stringify(m));
+                    }
                 }
             }
             else{
@@ -80,7 +97,6 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
             $("#content").append("<div class=\"pull-right\">" + emitTime + " - " + sender + " Say: <br>" + text + "</div><br><br>");
             var panel = document.getElementById("panel");
             panel.scrollTop = (panel.scrollHeight);
-            //TODO:
             var msg = {
                 "sender": sender,
                 "receiver": $scope.cusername,
@@ -100,12 +116,15 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
         }
     };
 
-    $scope.requestChat = function() {
+    $scope.requestChat = function(callback) {
         if ($scope.cusername == $scope.username) {
             alert("Cannot talk to yourself! Are you crazy?");
         }
-        else if($scope.cusername != undefined){
-            var data = {username: dataService.getUserName(), cusername: $scope.cusername};
+        if($scope.cusername == dataService.getConnectUserName()){
+            alert("You have already connected to " + $scope.cusername + "!");
+        }
+        else if($scope.cusername != undefined && $scope.cusername != ""){
+            var data = {username: dataService.getUserName(), cusername: $scope.cusername, callback: callback};
             var transform = function (data) {
                 return $.param(data);
             };
@@ -142,5 +161,17 @@ app.controller("chatCtrl", function ($scope, $http, fileReader, $location, $filt
                 alert("lost connection");
             });
         }
+    };
+
+    $scope.endChat = function(){
+        var m = {
+            "ack":true,
+            "isend": true,
+            "username": dataService.getUserName(),
+            "cusername": dataService.getConnectUserName()
+        };
+        $scope.cusername = "";
+        dataService.setConnectUserName($scope.cusername);
+        socket.send(JSON.stringify(m));
     }
 });

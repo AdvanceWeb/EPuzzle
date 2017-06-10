@@ -6,6 +6,7 @@ package entity;
  */
 public class Ack {
     private boolean ack;
+    private boolean isend;
     private String username;
     private String cusername;
 
@@ -18,6 +19,14 @@ public class Ack {
 
     public void setAck(boolean ack) {
         this.ack = ack;
+    }
+
+    public boolean isIsend() {
+        return isend;
+    }
+
+    public void setIsend(boolean isend) {
+        this.isend = isend;
     }
 
     public String getUsername() {

@@ -32,9 +32,9 @@ public class OpenChatRoom {
         }
         //加入用户池
         UserPool.add(session,username);
-        // System.out.println(username + " added to userpool!");
-        // System.out.println("session id : " + session.getId());
-        // System.out.println("session id in pool : " + ((Session)UserPool.getUserPool().get(username)).getId());
+        System.out.println(username + " added to userpool!");
+        System.out.println("session id : " + session.getId());
+        System.out.println("session id in pool : " + ((Session)UserPool.getUserPool().get(username)).getId());
     }
 
     @OnMessage
@@ -49,8 +49,11 @@ public class OpenChatRoom {
                 s.getBasicRemote().sendText(message);
                 DBConnect connect =new DBConnect();
                 try {
-                    if (ack.isAck()) {
-                        connect.insert("INSERT INTO `web`.`chat_history` (`user1`, `user2`) VALUES ('" + ack.getCusername() + "', '" + ack.getUsername() + "');");
+                    if (ack.isAck() && !ack.isIsend()) {
+                        String chatNum = connect.getChatNum(ack.getCusername(),ack.getUsername());
+                        if (chatNum.equals("")) {
+                            connect.insert("INSERT INTO `web`.`chat_history` (`user1`, `user2`) VALUES ('" + ack.getCusername() + "', '" + ack.getUsername() + "');");
+                        }
                     }
                 }
                 catch (SQLException e){
