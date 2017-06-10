@@ -8,8 +8,8 @@ import java.sql.*;
  * Created by dell on 2017/6/2.
  */
 public class DBConnect {
-    public static final String url = "jdbc:mysql://106.15.88.95:3306/web";
-    public static final String name = "com.mysql.jdbc.Driver";
+    public static final String url = "jdbc:mysql://106.15.88.95:3306/web?useSSL=false";
+    public static final String name = "com.mysql.cj.jdbc.Driver";
     public static final String user = "root";
     public static final String password = "fdu14WEB";
 

@@ -14,6 +14,7 @@ public class UserPool {
 
     public static void add(Session session, String username) {
         USER_POOL.put(username, session);
+        System.out.println(username + "added to user pool!!");
     }
 
     public static void remove(String username) {
